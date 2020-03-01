@@ -30,12 +30,12 @@
     {
         "key": "ctrl+f",
         "command": "cursorRight",
-        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Nomal'"
+        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
     },
     {
         "key": "ctrl+b",
         "command": "cursorLeft",
-        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Nomal'"
+        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
     },
     // Suggestion時
     {
@@ -87,5 +87,33 @@
     {
         "key": "ctrl+k ctrl+s",
         "command": "workbench.action.openWorkspace"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+shift+p",
+        "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+        "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "ctrl+k x",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeActiveEditor"
     },
 ]
