@@ -26,4 +26,6 @@
     },
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
+    "files.autoGuessEncoding": true,
+    "workbench.editor.enablePreview": false,
 }

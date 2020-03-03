@@ -19,8 +19,9 @@
         "when": "editorFocus"
     },
     {
-        "key": "shift+space shift+b",
-        "command": "workbench.action.quickOpen"
+        "key": "space q",
+        "command": "workbench.action.quickOpen",
+        "when": "vim.mode != 'Insert' && !terminalFocus"
     },
     {
         "key": "ctrl+p",
@@ -53,16 +54,18 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
-        "key": "shift+space b",
-        "command": "workbench.action.showAllEditors"
+        "key": "space b",
+        "command": "workbench.action.showAllEditors",
+        "when": "vim.mode != 'Insert' && !terminalFocus"
     },
     {
         "key": "ctrl+k ctrl+p",
         "command": "-workbench.action.showAllEditors"
     },
     {
-        "key": "shift+space e",
-        "command": "workbench.view.explorer"
+        "key": "space e",
+        "command": "workbench.view.explorer",
+        "when": "vim.mode != 'Insert' && !terminalFocus"
     },
     {
         "key": "ctrl+shift+e",
@@ -77,8 +80,8 @@
         "command": "-workbench.action.terminal.toggleTerminal"
     },
     {
-        "key": "shift+space l",
-        "command": "workbench.action.focusRightGroup"
+        "key": "alt+o",
+        "command": "workbench.action.focusNextGroup"
     },
     {
         "key": "ctrl+k ctrl+right",
@@ -117,5 +120,15 @@
         "key": "ctrl+p",
         "command": "workbench.action.quickOpenSelectPrevious",
         "when": "inFilesPicker || inQuickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus"
     },
 ]
