@@ -1,13 +1,16 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
+    // keybidings.jsonオープン
     {
-        "key": "ctrl+shift+q",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key": "ctrl+k ctrl+m",
+        "key": "shift+space k",
         "command": "workbench.action.openGlobalKeybindingsFile"
     },
+    // settings.jsonオープン
+    {
+        "key": "shift+space s",
+        "command": "workbench.action.openSettingsJson"
+    },
+    // ターミナルとのフォーカス移動
     {
         "key": "ctrl+t",
         "command": "workbench.action.focusActiveEditorGroup",
@@ -21,7 +24,7 @@
     {
         "key": "space q",
         "command": "workbench.action.quickOpen",
-        "when": "vim.mode != 'Insert' && !terminalFocus"
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+p",
@@ -56,7 +59,7 @@
     {
         "key": "space b",
         "command": "workbench.action.showAllEditors",
-        "when": "vim.mode != 'Insert' && !terminalFocus"
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+k ctrl+p",
@@ -65,14 +68,14 @@
     {
         "key": "space e",
         "command": "workbench.view.explorer",
-        "when": "vim.mode != 'Insert' && !terminalFocus"
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+shift+e",
         "command": "-workbench.view.explorer"
     },
     {
-        "key": "ctrl+w ctrl+t",
+        "key": "shift+space t",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
@@ -88,11 +91,11 @@
         "command": "-workbench.action.focusRightGroup"
     },
     {
-        "key": "ctrl+k ctrl+s",
+        "key": "shift+space w",
         "command": "workbench.action.openWorkspace"
     },
     {
-        "key": "ctrl+k x",
+        "key": "shift+space x",
         "command": "workbench.action.closeActiveEditor"
     },
     {
@@ -100,7 +103,7 @@
         "command": "-workbench.action.closeActiveEditor"
     },
     {
-        "key": "ctrl+k b",
+        "key": "shift+space e",
         "command": "workbench.action.toggleSidebarVisibility"
     },
     {
@@ -130,5 +133,38 @@
         "key": "ctrl+p",
         "command": "list.focusUp",
         "when": "listFocus && !inputFocus"
+    },
+    // タブ移動
+    {
+        "key": "space h",
+        "command": "workbench.action.previousEditor",
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space l",
+        "command": "workbench.action.nextEditor",
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space ]",
+        "command": "workbench.action.gotoSymbol",
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.gotoSymbol"
+    },
+    {
+        "key": "shift+space ]",
+        "command": "workbench.action.showAllSymbols",
+        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "-workbench.action.gotoSymbol"
     },
 ]
