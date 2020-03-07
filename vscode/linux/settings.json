@@ -23,6 +23,9 @@
         "statusBar.noFolderBackground": "#294372",
         "statusBar.debuggingBackground": "#294372"
     },
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.openPositioning": "first",
+    "workbench.editor.tabSizing": "shrink",
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
     "files.autoGuessEncoding": true,

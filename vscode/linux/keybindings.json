@@ -24,7 +24,7 @@
     {
         "key": "space q",
         "command": "workbench.action.quickOpen",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+p",
@@ -34,12 +34,12 @@
     {
         "key": "ctrl+f",
         "command": "cursorRight",
-        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+b",
         "command": "cursorLeft",
-        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     // Suggestion時
     {
@@ -49,17 +49,17 @@
     {
         "key": "ctrl+n",
         "command": "selectNextSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+p",
         "command": "selectPrevSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "space b",
         "command": "workbench.action.showAllEditors",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+k ctrl+p",
@@ -68,7 +68,7 @@
     {
         "key": "space e",
         "command": "workbench.view.explorer",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+shift+e",
@@ -138,17 +138,17 @@
     {
         "key": "space h",
         "command": "workbench.action.previousEditor",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "space l",
         "command": "workbench.action.nextEditor",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "space ]",
         "command": "workbench.action.gotoSymbol",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+shift+o",
@@ -157,7 +157,7 @@
     {
         "key": "shift+space ]",
         "command": "workbench.action.showAllSymbols",
-        "when": "vim.mode != 'Insert' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "ctrl+t",
