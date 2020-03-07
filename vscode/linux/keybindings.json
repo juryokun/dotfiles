@@ -34,12 +34,12 @@
     {
         "key": "ctrl+f",
         "command": "cursorRight",
-        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
     },
     {
         "key": "ctrl+b",
         "command": "cursorLeft",
-        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "editorTextFocus && !editorReadOnly && vim.mode != 'Normal'"
     },
     // Suggestion時
     {
@@ -49,12 +49,12 @@
     {
         "key": "ctrl+n",
         "command": "selectNextSuggestion",
-        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
         "key": "ctrl+p",
         "command": "selectPrevSuggestion",
-        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
         "key": "space b",
