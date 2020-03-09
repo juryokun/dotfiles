@@ -151,11 +151,7 @@
         "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
-        "key": "ctrl+shift+o",
-        "command": "-workbench.action.gotoSymbol"
-    },
-    {
-        "key": "shift+space ]",
+        "key": "space ctrl+]",
         "command": "workbench.action.showAllSymbols",
         "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
@@ -166,5 +162,27 @@
     {
         "key": "ctrl+shift+o",
         "command": "-workbench.action.gotoSymbol"
+    },
+    {
+        "key": "shift+space ]",
+        "command": "editor.action.peekDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    },
+    {
+        "key": "shift+space shift+]",
+        "command": "editor.action.revealDefinitionAside",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "alt+]",
+        "command": "editor.action.showDefinitionPreviewHover"
+    },
+    {
+        "key": "shift+space shift+l",
+        "command": "workbench.action.closeEditorsToTheRight"
+    },
+    {
+        "key": "shift+space shift+h",
+        "command": "workbench.action.closeEditorsToTheLeft"
     },
 ]
