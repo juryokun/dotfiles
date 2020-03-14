@@ -12,12 +12,12 @@
     },
     // ターミナルとのフォーカス移動
     {
-        "key": "ctrl+t",
+        "key": "alt+k",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
     },
     {
-        "key": "ctrl+t",
+        "key": "alt+j",
         "command": "workbench.action.terminal.focus",
         "when": "editorFocus"
     },
@@ -185,4 +185,46 @@
         "key": "shift+space shift+h",
         "command": "workbench.action.closeEditorsToTheLeft"
     },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.focusSideBar"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "shift+space r",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+        "key": "shift+space .",
+        "command": "breadcrumbs.focusAndSelect",
+        "when": "breadcrumbsPossible"
+    },
+    {
+        "key": "shift+space ,",
+        "command": "breadcrumbs.focus",
+        "when": "breadcrumbsPossible"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "breadcrumbs.focusNext",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "breadcrumbs.focusNextWithPicker",
+        "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "breadcrumbs.focusPrevious",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "breadcrumbs.focusPreviousWithPicker",
+        "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+    }
 ]
