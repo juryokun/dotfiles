@@ -226,5 +226,21 @@
         "key": "ctrl+h",
         "command": "breadcrumbs.focusPreviousWithPicker",
         "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
-    }
+    },
+    {
+        "key": "shift+space i",
+        "command": "settings.cycle",
+        "when": "editorTextFocus",
+        "args": {
+            "id": "relativeLineNumbers",
+            "values": [
+                {
+                    "editor.lineNumbers": "on"
+                },
+                {
+                    "editor.lineNumbers": "relative"
+                }
+            ]
+        }
+    },
 ]

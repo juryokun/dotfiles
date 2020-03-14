@@ -32,6 +32,7 @@
     "workbench.editor.enablePreview": false,
     "files.trimTrailingWhitespace": true,
     "editor.renderWhitespace": "all",
+    "explorer.autoReveal": false,
     "vim.normalModeKeyBindings": [
         {
             "before": [
@@ -52,5 +53,5 @@
             ]
         },
     ],
-    "explorer.autoReveal": false,
+    "editor.lineNumbers": "relative",
 }
