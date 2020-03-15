@@ -1,12 +1,34 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
+    // keybidings.jsonオープン
     {
-        "key": "ctrl+k ctrl+m",
+        "key": "shift+space k",
         "command": "workbench.action.openGlobalKeybindingsFile"
     },
+    // settings.jsonオープン
     {
-        "key": "ctrl+k ctrl+m",
-        "command": "-workbench.extensions.action.showRecommendedKeymapExtensions"
+        "key": "shift+space s",
+        "command": "workbench.action.openSettingsJson"
+    },
+    // ターミナルとのフォーカス移動
+    {
+        "key": "alt+k",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorFocus"
+    },
+    {
+        "key": "space q",
+        "command": "workbench.action.quickOpen",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "cmd+p",
+        "command": "-workbench.action.quickOpen"
     },
     // Insert Modeでのカーソル移動
     {
@@ -22,7 +44,7 @@
     // Suggestion時
     {
         "key": "ctrl+l",
-        "command": "acceptSelectedSuggestion"
+        "command": "acceptSelectedSuggestion",
     },
     {
         "key": "ctrl+n",
@@ -35,41 +57,25 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
-        "key": "shift+space b",
-        "command": "workbench.action.showAllEditors"
+        "key": "space b",
+        "command": "workbench.action.showAllEditors",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "alt+cmd+tab",
         "command": "-workbench.action.showAllEditors"
     },
     {
-        "key": "shift+space shift+b",
-        "command": "workbench.action.quickOpen"
-    },
-    {
-        "key": "cmd+p",
-        "command": "-workbench.action.quickOpen"
-    },
-    {
-        "key": "shift+space e",
-        "command": "workbench.view.explorer"
+        "key": "space e",
+        "command": "workbench.view.explorer",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "shift+cmd+e",
         "command": "-workbench.view.explorer"
     },
     {
-        "key": "ctrl+t",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+t",
-        "command": "workbench.action.terminal.focus",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+w ctrl+t",
+        "key": "shift+space t",
         "command": "workbench.action.terminal.toggleTerminal"
     },
     {
@@ -77,30 +83,149 @@
         "command": "-workbench.action.terminal.toggleTerminal"
     },
     {
-        "key": "shift+space l",
-        "command": "workbench.action.focusRightGroup"
+        "key": "alt+o",
+        "command": "workbench.action.focusNextGroup"
     },
     {
         "key": "cmd+k cmd+right",
         "command": "-workbench.action.focusRightGroup"
     },
     {
-        "key": "ctrl+k ctrl+s",
+        "key": "shift+space w",
         "command": "workbench.action.openWorkspace"
     },
     {
+        "key": "shift+space x",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "shift+space e",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
         "key": "ctrl+n",
-        "command": "workbench.action.quickOpenNavigateNextInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "inFilesPicker || inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "inFilesPicker || inQuickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "list.focusDown",
+        "when": "listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "list.focusUp",
+        "when": "listFocus && !inputFocus"
+    },
+    // タブ移動
+    {
+        "key": "space h",
+        "command": "workbench.action.previousEditor",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space l",
+        "command": "workbench.action.nextEditor",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space ]",
+        "command": "workbench.action.gotoSymbol",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space ctrl+]",
+        "command": "workbench.action.showAllSymbols",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "cmd+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "cmd+shift+o",
+        "command": "-workbench.action.gotoSymbol"
+    },
+    {
+        "key": "shift+space ]",
+        "command": "editor.action.peekDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    },
+    {
+        "key": "shift+space shift+]",
+        "command": "editor.action.revealDefinitionAside",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    },
+    {
+        "key": "alt+]",
+        "command": "editor.action.showDefinitionPreviewHover"
+    },
+    {
+        "key": "shift+space shift+l",
+        "command": "workbench.action.closeEditorsToTheRight"
+    },
+    {
+        "key": "shift+space shift+h",
+        "command": "workbench.action.closeEditorsToTheLeft"
+    },
+    {
+        "key": "alt+h",
+        "command": "workbench.action.focusSideBar"
+    },
+    {
+        "key": "alt+l",
+        "command": "workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": "shift+space r",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
+        "key": "shift+space .",
+        "command": "breadcrumbs.focusAndSelect",
+        "when": "breadcrumbsPossible"
+    },
+    {
+        "key": "shift+space ,",
+        "command": "breadcrumbs.focus",
+        "when": "breadcrumbsPossible"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "breadcrumbs.focusNext",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "breadcrumbs.focusNextWithPicker",
+        "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "breadcrumbs.focusPrevious",
+        "when": "breadcrumbsActive && breadcrumbsVisible"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "breadcrumbs.focusPreviousWithPicker",
+        "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
     },
     {
         "key": "cmd+p",
         "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
-    },
-    {
-        "key": "ctrl+p",
-        "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
         "when": "inFilesPicker && inQuickOpen"
     },
     {
@@ -109,16 +234,19 @@
         "when": "inFilesPicker && inQuickOpen"
     },
     {
-        "key": "cmd+p",
-        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
+        "key": "shift+space i",
+        "command": "settings.cycle",
+        "when": "editorTextFocus",
+        "args": {
+            "id": "relativeLineNumbers",
+            "values": [
+                {
+                    "editor.lineNumbers": "on"
+                },
+                {
+                    "editor.lineNumbers": "relative"
+                }
+            ]
+        }
     },
-    {
-        "key": "ctrl+k b",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "cmd+b",
-        "command": "-workbench.action.toggleSidebarVisibility"
-    }
 ]
