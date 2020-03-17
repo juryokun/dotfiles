@@ -3,9 +3,11 @@
         ".pyenv"
     ],
     "python.venvPath": "~/.pyenv",
+    "window.zoomLevel": 0,
+    "debug.allowBreakpointsEverywhere": true,
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
     "terminal.integrated.fontSize": 13,
-    "vim.easymotion": true,
+    "vim.easymotion": false,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "vim.whichwrap": "h,l,<,>,[,]",
@@ -31,4 +33,33 @@
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
     "languageServerHaskell.useCustomHieWrapper": true,
+    "explorer.openEditors.visible": 0,
+    "workbench.editor.openPositioning": "first",
+    "workbench.editor.tabSizing": "shrink",
+    "files.autoGuessEncoding": true,
+    "workbench.editor.enablePreview": false,
+    "files.trimTrailingWhitespace": true,
+    "editor.renderWhitespace": "all",
+    "explorer.autoReveal": false,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "ctrl+j"
+            ],
+            "after": [
+                "4",
+                "j",
+            ]
+        },
+        {
+            "before": [
+                "ctrl+k"
+            ],
+            "after": [
+                "4",
+                "k",
+            ]
+        },
+    ],
+    "editor.lineNumbers": "relative",
 }
