@@ -54,4 +54,5 @@
         },
     ],
     "editor.lineNumbers": "relative",
+    "workbench.startupEditor": "none",
 }
