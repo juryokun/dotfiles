@@ -12,12 +12,12 @@
     },
     // ターミナルとのフォーカス移動
     {
-        "key": "alt+k",
+        "key": "alt+t",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
     },
     {
-        "key": "alt+j",
+        "key": "alt+t",
         "command": "workbench.action.terminal.focus",
         "when": "editorFocus"
     },
@@ -84,7 +84,7 @@
     },
     {
         "key": "alt+o",
-        "command": "workbench.action.focusNextGroup"
+        "command": "workbench.action.focusPreviousGroup"
     },
     {
         "key": "ctrl+k ctrl+right",
@@ -186,12 +186,52 @@
         "command": "workbench.action.closeEditorsToTheLeft"
     },
     {
-        "key": "alt+h",
-        "command": "workbench.action.focusSideBar"
+        "key": "alt+l",
+        "command": "workbench.action.focusRightGroup"
     },
     {
-        "key": "alt+l",
-        "command": "workbench.action.focusFirstEditorGroup"
+        "key": "alt+h",
+        "command": "workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "shift+alt+h",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "shift+alt+j",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "shift+alt+space h",
+        "command": "workbench.action.moveActiveEditorGroupLeft"
+    },
+    {
+        "key": "shift+alt+space l",
+        "command": "workbench.action.moveActiveEditorGroupRight"
+    },
+    {
+        "key": "shift+alt+space k",
+        "command": "workbench.action.moveActiveEditorGroupUp"
+    },
+    {
+        "key": "shift+alt+space j",
+        "command": "workbench.action.moveActiveEditorGroupDown"
     },
     {
         "key": "shift+space r",
