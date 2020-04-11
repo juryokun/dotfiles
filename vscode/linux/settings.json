@@ -55,4 +55,6 @@
     ],
     "editor.lineNumbers": "relative",
     "workbench.startupEditor": "none",
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "http://localhost:1991",
 }
