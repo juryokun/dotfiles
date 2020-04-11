@@ -12,12 +12,12 @@
     },
     // ターミナルとのフォーカス移動
     {
-        "key": "alt+k",
+        "key": "alt+t",
         "command": "workbench.action.focusActiveEditorGroup",
         "when": "terminalFocus"
     },
     {
-        "key": "alt+j",
+        "key": "alt+t",
         "command": "workbench.action.terminal.focus",
         "when": "editorFocus"
     },
@@ -84,7 +84,7 @@
     },
     {
         "key": "alt+o",
-        "command": "workbench.action.focusNextGroup"
+        "command": "workbench.action.focusPreviousGroup"
     },
     {
         "key": "cmd+k cmd+right",
@@ -183,11 +183,51 @@
     },
     {
         "key": "alt+h",
-        "command": "workbench.action.focusSideBar"
+        "command": "workbench.action.focusLeftGroup"
     },
     {
         "key": "alt+l",
-        "command": "workbench.action.focusFirstEditorGroup"
+        "command": "workbench.action.focusRightGroup"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "shift+alt+h",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "shift+alt+k",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "shift+alt+j",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "ctrl+w h",
+        "command": "workbench.action.moveActiveEditorGroupLeft"
+    },
+    {
+        "key": "ctrl+w l",
+        "command": "workbench.action.moveActiveEditorGroupRight"
+    },
+    {
+        "key": "ctrl+w k",
+        "command": "workbench.action.moveActiveEditorGroupUp"
+    },
+    {
+        "key": "ctrl+w j",
+        "command": "workbench.action.moveActiveEditorGroupDown"
     },
     {
         "key": "shift+space r",
