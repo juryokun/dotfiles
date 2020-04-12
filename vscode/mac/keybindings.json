@@ -182,20 +182,20 @@
         "command": "workbench.action.closeEditorsToTheLeft"
     },
     {
-        "key": "alt+h",
-        "command": "workbench.action.focusLeftGroup"
-    },
-    {
         "key": "alt+l",
         "command": "workbench.action.focusRightGroup"
     },
     {
-        "key": "alt+k",
-        "command": "workbench.action.focusAboveGroup"
+        "key": "alt+h",
+        "command": "workbench.action.focusLeftGroup"
     },
     {
         "key": "alt+j",
         "command": "workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "alt+k",
+        "command": "workbench.action.focusAboveGroup"
     },
     {
         "key": "shift+alt+h",
@@ -264,16 +264,6 @@
         "when": "breadcrumbsActive && breadcrumbsVisible && listFocus && !inputFocus"
     },
     {
-        "key": "cmd+p",
-        "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
-    },
-    {
-        "key": "shift+cmd+p",
-        "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
-        "when": "inFilesPicker && inQuickOpen"
-    },
-    {
         "key": "shift+space i",
         "command": "settings.cycle",
         "when": "editorTextFocus",
@@ -288,5 +278,9 @@
                 }
             ]
         }
+    },
+    {
+        "key": "shift+space f",
+        "command": "list.toggleFilterOnType"
     },
 ]
