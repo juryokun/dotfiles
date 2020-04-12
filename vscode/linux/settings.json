@@ -57,4 +57,8 @@
     "workbench.startupEditor": "none",
     "plantuml.render": "PlantUMLServer",
     "plantuml.server": "http://localhost:1991",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.tree.indent": 20,
+    "workbench.tree.renderIndentGuides": "always",
+    "editor.showFoldingControls": "always",
 }

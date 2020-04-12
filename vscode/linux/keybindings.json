@@ -283,4 +283,8 @@
             ]
         }
     },
+    {
+        "key": "shift+space f",
+        "command": "list.toggleFilterOnType"
+    },
 ]
