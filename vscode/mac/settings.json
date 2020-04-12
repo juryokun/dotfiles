@@ -1,8 +1,4 @@
 {
-    "python.venvFolders": [
-        ".pyenv"
-    ],
-    "python.venvPath": "~/.pyenv",
     "window.zoomLevel": 0,
     "debug.allowBreakpointsEverywhere": true,
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
@@ -28,11 +24,8 @@
         "statusBar.noFolderBackground": "#294372",
         "statusBar.debuggingBackground": "#294372"
     },
-    "languageServerHaskell.hieExecutablePath": "/Users/juryokun/.local/bin/hie",
-    "languageServerHaskell.useCustomHieWrapperPath": "/Users/juryokun/.local/bin/hie-wrapper",
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
-    "languageServerHaskell.useCustomHieWrapper": true,
     "explorer.openEditors.visible": 0,
     "workbench.editor.openPositioning": "first",
     "workbench.editor.tabSizing": "shrink",
@@ -63,4 +56,17 @@
     ],
     "editor.lineNumbers": "relative",
     "workbench.startupEditor": "none",
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "http://localhost:1991",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.tree.indent": 20,
+    "workbench.tree.renderIndentGuides": "always",
+    "editor.showFoldingControls": "always",
+    "python.venvFolders": [
+        ".pyenv"
+    ],
+    "python.venvPath": "~/.pyenv",
+    "languageServerHaskell.hieExecutablePath": "/Users/juryokun/.local/bin/hie",
+    "languageServerHaskell.useCustomHieWrapperPath": "/Users/juryokun/.local/bin/hie-wrapper",
+    "languageServerHaskell.useCustomHieWrapper": true,
 }

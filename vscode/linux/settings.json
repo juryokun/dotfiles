@@ -1,8 +1,10 @@
 {
+    /* 共通設定 */
     "window.zoomLevel": 0,
     "debug.allowBreakpointsEverywhere": true,
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
     "terminal.integrated.fontSize": 13,
+    "vim.easymotion": false,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "vim.whichwrap": "h,l,<,>,[,]",
@@ -23,11 +25,11 @@
         "statusBar.noFolderBackground": "#294372",
         "statusBar.debuggingBackground": "#294372"
     },
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
     "explorer.openEditors.visible": 0,
     "workbench.editor.openPositioning": "first",
     "workbench.editor.tabSizing": "shrink",
-    "editor.wordWrap": "on",
-    "editor.minimap.enabled": false,
     "files.autoGuessEncoding": true,
     "workbench.editor.enablePreview": false,
     "files.trimTrailingWhitespace": true,
@@ -55,10 +57,11 @@
     ],
     "editor.lineNumbers": "relative",
     "workbench.startupEditor": "none",
-    "plantuml.render": "PlantUMLServer",
-    "plantuml.server": "http://localhost:1991",
     "workbench.iconTheme": "vscode-icons",
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
     "editor.showFoldingControls": "always",
+    /* 個別設定 */
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "http://localhost:1991",
 }
