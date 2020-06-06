@@ -21,9 +21,9 @@
     "vim.statusBarColors.visualline": "#af5f87",
     "vim.statusBarColors.replace": "#5f0000",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#294372",
-        "statusBar.noFolderBackground": "#294372",
-        "statusBar.debuggingBackground": "#294372"
+        "statusBar.background": "#af5f87",
+        "statusBar.noFolderBackground": "#af5f87",
+        "statusBar.debuggingBackground": "#af5f87"
     },
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
@@ -64,4 +64,6 @@
     /* 個別設定 */
     "plantuml.render": "PlantUMLServer",
     "plantuml.server": "http://localhost:1991",
+    "editor.fontFamily": "'Source Code Pro for Powerline'",
+    "editor.fontSize": 13,
 }

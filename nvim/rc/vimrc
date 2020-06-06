@@ -1,0 +1,31 @@
+"==============================================================================================
+" LOAD SETTING FILES
+"==============================================================================================
+if !&compatible
+    set nocompatible
+endif
+
+" set path
+if has('win32')
+    let g:cf_path = '~/AppData/local/nvim'
+else
+    let g:cf_path = '~/.config/nvim'
+endif
+let g:tools_path = 'C:\tools'
+
+let s:rc_dir = fnamemodify(expand('<sfile>'), ':h')
+
+" dein
+execute 'source' s:rc_dir . '/bundle.vim'
+if dein#tap('Alduin')
+    colorscheme alduin
+endif
+
+" base
+execute 'source' s:rc_dir . '/base.vim'
+
+" keybind
+execute 'source' s:rc_dir . '/keybind.vim'
+
+" function
+execute 'source' s:rc_dir . '/func.vim'
