@@ -23,7 +23,7 @@ export FZF_DEFAULT_OPTS='--reverse'
 # export DOCKER_HOST='tcp://0.0.0.0:2375'
 
 # path
-set PATH ~/bin $PATH
+set PATH ~/cmd $PATH
 set PATH ~/development/flutter/bin $PATH
 
 # x-server
