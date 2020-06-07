@@ -66,4 +66,5 @@
     "plantuml.server": "http://localhost:1991",
     "editor.fontFamily": "'Source Code Pro for Powerline'",
     "editor.fontSize": 13,
+    "python.venvPath": "~/pyvenv",
 }
