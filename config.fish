@@ -26,6 +26,9 @@ export FZF_DEFAULT_OPTS='--reverse'
 set PATH ~/cmd $PATH
 set PATH ~/development/flutter/bin $PATH
 
+# for haskell
+set PATH ~/.local $PATH
+
 # x-server
 # export DISPLAY=localhost:0.0
 
