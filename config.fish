@@ -33,3 +33,6 @@ set PATH ~/development/flutter/bin $PATH
 set PATH ~/.pyenv/bin $PATH
 if which pyenv > /dev/null; eval (pyenv init - | source); end
 
+if test -e ~/cmd/start_tmux.sh
+    bash ~/cmd/start_tmux.sh
+end
