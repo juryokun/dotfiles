@@ -65,10 +65,11 @@
     "editor.showFoldingControls": "always",
     /* 個別設定 */
     "python.venvFolders": [
-        ".pyenv"
+        "pyvenv"
     ],
-    "python.venvPath": "~/.pyenv",
+    "python.venvPath": "~/pyvenv",
     "languageServerHaskell.hieExecutablePath": "/Users/juryokun/.local/bin/hie",
     "languageServerHaskell.useCustomHieWrapperPath": "/Users/juryokun/.local/bin/hie-wrapper",
     "languageServerHaskell.useCustomHieWrapper": true,
+    "rust-client.enableMultiProjectSetup": null,
 }
