@@ -35,6 +35,7 @@
     "files.trimTrailingWhitespace": true,
     "editor.renderWhitespace": "all",
     "explorer.autoReveal": false,
+    "vim.cursorStylePerMode.visual": "block",
     "vim.normalModeKeyBindings": [
         {
             "before": [
