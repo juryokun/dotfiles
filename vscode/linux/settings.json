@@ -5,6 +5,7 @@
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
     "terminal.integrated.fontSize": 13,
     "vim.easymotion": false,
+    "vim.sneak": true,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
     "vim.whichwrap": "h,l,<,>,[,]",
@@ -55,6 +56,22 @@
                 "k",
             ]
         },
+        {
+            "before": [
+                "u"
+            ],
+            "commands": [
+                "undo"
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "commands": [
+                "redo"
+            ]
+        }
     ],
     "editor.lineNumbers": "relative",
     "workbench.startupEditor": "none",
