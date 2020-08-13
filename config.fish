@@ -4,6 +4,7 @@
 # fisher
 set fish_theme bobthefish
 set theme_color_scheme zenburn
+set -g theme_date_timezone Asia/Tokyo
 set -x FZF_LEGACY_KEYBINDINGS 1
 
 # alias
