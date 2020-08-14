@@ -198,19 +198,19 @@
         "command": "workbench.action.focusAboveGroup"
     },
     {
-        "key": "shift+alt+h",
+        "key": "shift+space alt+h",
         "command": "workbench.action.moveEditorToLeftGroup"
     },
     {
-        "key": "shift+alt+l",
+        "key": "shift+space alt+l",
         "command": "workbench.action.moveEditorToRightGroup"
     },
     {
-        "key": "shift+alt+k",
+        "key": "shift+space alt+k",
         "command": "workbench.action.moveEditorToAboveGroup"
     },
     {
-        "key": "shift+alt+j",
+        "key": "shift+space alt+j",
         "command": "workbench.action.moveEditorToBelowGroup"
     },
     {
