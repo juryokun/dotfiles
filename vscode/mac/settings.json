@@ -81,6 +81,7 @@
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
     "editor.showFoldingControls": "always",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
     /* 個別設定 */
     "python.venvFolders": [
         "pyvenv"
@@ -90,4 +91,5 @@
     "languageServerHaskell.useCustomHieWrapperPath": "/Users/juryokun/.local/bin/hie-wrapper",
     "languageServerHaskell.useCustomHieWrapper": true,
     "rust-client.enableMultiProjectSetup": null,
+    "html.format.enable": false,
 }

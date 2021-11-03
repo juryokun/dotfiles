@@ -33,9 +33,19 @@ set PATH ~/.local $PATH
 # x-server
 # export DISPLAY=localhost:0.0
 
+# rust
+set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
+
 # pyenv
-set PATH ~/.pyenv/bin $PATH
-if which pyenv > /dev/null; eval (pyenv init - | source); end
+set -Ux PYENV_ROOT ~/.pyenv
+set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
+if command -v pyenv 1>/dev/null 2>&1
+    if status is-login && test -z "$TMUX"
+        pyenv init --path fish | source
+    end
+    pyenv init - fish | source
+#    pyenv virtualenv-init - fish | source
+end
 
 if test -e ~/cmd/start_tmux.sh
     bash ~/cmd/start_tmux.sh
