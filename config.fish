@@ -35,7 +35,7 @@ set PATH ~/.local $PATH
 
 # pyenv
 set PATH ~/.pyenv/bin $PATH
-if which pyenv > /dev/null; eval (pyenv init - | source); end
+# if which pyenv > /dev/null; eval (pyenv init - | source); end
 
 if test -e ~/cmd/start_tmux.sh
     bash ~/cmd/start_tmux.sh

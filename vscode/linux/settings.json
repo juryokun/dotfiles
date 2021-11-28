@@ -2,8 +2,8 @@
     /* 共通設定 */
     "window.zoomLevel": 0,
     "debug.allowBreakpointsEverywhere": true,
-    "terminal.integrated.fontFamily": "Source Code Pro for Powerline",
-    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontFamily": "HackGen",
+    "terminal.integrated.fontSize": 16,
     "vim.easymotion": false,
     "vim.sneak": true,
     "editor.formatOnType": true,
@@ -22,9 +22,9 @@
     "vim.statusBarColors.visualline": "#af5f87",
     "vim.statusBarColors.replace": "#5f0000",
     "workbench.colorCustomizations": {
-        "statusBar.background": "#294372",
-        "statusBar.noFolderBackground": "#294372",
-        "statusBar.debuggingBackground": "#294372"
+        "statusBar.background": "#af5f87",
+        "statusBar.noFolderBackground": "#af5f87",
+        "statusBar.debuggingBackground": "#af5f87"
     },
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
@@ -79,10 +79,12 @@
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
     "editor.showFoldingControls": "always",
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.sendKeybindingsToShell": true,
     /* 個別設定 */
     "plantuml.render": "PlantUMLServer",
     "plantuml.server": "http://localhost:1991",
-    "editor.fontFamily": "'Source Code Pro for Powerline'",
-    "editor.fontSize": 13,
-    "python.venvPath": "~/pyvenv",
+    "editor.fontFamily": "HackGen",
+    "editor.fontSize": 17,
+    "python.venvPath": "~/pyvenv"
 }
