@@ -5,7 +5,7 @@
 set fish_theme bobthefish
 set theme_color_scheme zenburn
 set -g theme_date_timezone Asia/Tokyo
-set -x FZF_LEGACY_KEYBINDINGS 1
+set -U FZF_LEGACY_KEYBINDINGS 0
 
 # alias
 which nvim >/dev/null 2>&1
@@ -15,6 +15,21 @@ end
 
 # fzf
 export FZF_DEFAULT_OPTS='--reverse'
+function __fzf_z -d 'Find and Jump to a recent directory.'
+  set -l query (commandline)
+
+  if test -n $query
+    set flags --query "$query"
+  end
+
+  z -l | awk '{ print $2 }' | eval (__fzfcmd) "$FZF_DEFAULT_OPTS $flags" | read recent
+  if [ $recent ]
+      cd $recent
+      commandline -r ''
+      commandline -f repaint
+  end
+end
+bind \cz __fzf_z
 
 # vagrant setting
 # export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
@@ -55,3 +70,4 @@ set -x PATH $HOME/.nodebrew/current/bin $PATH
 if test -e ~/cmd/start_tmux.sh
     bash ~/cmd/start_tmux.sh
 end
+
