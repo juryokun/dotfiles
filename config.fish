@@ -30,6 +30,7 @@ function __fzf_z -d 'Find and Jump to a recent directory.'
   end
 end
 bind \cz __fzf_z
+bind \cx __fzf_cd
 
 # vagrant setting
 # export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
