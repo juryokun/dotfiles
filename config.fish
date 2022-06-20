@@ -30,7 +30,14 @@ function __fzf_z -d 'Find and Jump to a recent directory.'
   end
 end
 bind \cz __fzf_z
-bind \cx __fzf_cd
+#bind \cx __fzf_cd
+bind ç __fzf_cd
+
+function __fzf_open_code -d 'Open file with Code.'
+  code -r $(fzf)
+end
+bind \eO __fzf_open_code
+bind Ø __fzf_open_code
 
 # vagrant setting
 # export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
