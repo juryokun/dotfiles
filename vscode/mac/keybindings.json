@@ -87,6 +87,10 @@
         "command": "workbench.action.focusPreviousGroup"
     },
     {
+        "key": "shift+space o",
+        "command": "workbench.action.focusPreviousGroup"
+    },
+    {
         "key": "cmd+k cmd+right",
         "command": "-workbench.action.focusRightGroup"
     },

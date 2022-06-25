@@ -122,3 +122,4 @@ fi
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # umask 022
 # export PATH=$PATH:~/bin
+. "$HOME/.cargo/env"

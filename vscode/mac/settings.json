@@ -28,6 +28,7 @@
     },
     "editor.wordWrap": "on",
     "editor.minimap.enabled": false,
+    "editor.tabSize": 4,
     "explorer.openEditors.visible": 0,
     "workbench.editor.openPositioning": "first",
     "workbench.editor.tabSizing": "shrink",
@@ -77,10 +78,11 @@
     "workbench.startupEditor": "none",
     "plantuml.render": "PlantUMLServer",
     "plantuml.server": "http://localhost:1991",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "always",
     "editor.showFoldingControls": "always",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
     /* 個別設定 */
     "python.venvFolders": [
         "pyvenv"
@@ -90,4 +92,28 @@
     "languageServerHaskell.useCustomHieWrapperPath": "/Users/juryokun/.local/bin/hie-wrapper",
     "languageServerHaskell.useCustomHieWrapper": true,
     "rust-client.enableMultiProjectSetup": null,
+    "html.format.enable": false,
+    "vsnotes.defaultNotePath": "/Users/juryokun/Documents/20.vscode/vsnotes",
+    "vsnotes.noteTitleConvertSpaces": " ",
+    "vsnotes.defaultNoteTitle": "{dt}_{title}.{ext}",
+    "vsnotes.tokens": [
+        {
+            "type": "datetime",
+            "token": "{dt}",
+            "format": "YYYY-MM-DD",
+            "description": "Insert formatted datetime."
+        },
+        {
+            "type": "title",
+            "token": "{title}",
+            "description": "Insert note title from input box.",
+            "format": "Untitled"
+        },
+        {
+            "type": "extension",
+            "token": "{ext}",
+            "description": "Insert file extension.",
+            "format": "md"
+        }
+    ],
 }
