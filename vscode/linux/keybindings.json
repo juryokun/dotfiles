@@ -87,6 +87,10 @@
         "command": "workbench.action.focusPreviousGroup"
     },
     {
+        "key": "shift+space o",
+        "command": "workbench.action.focusPreviousGroup"
+    },
+    {
         "key": "ctrl+k ctrl+right",
         "command": "-workbench.action.focusRightGroup"
     },
@@ -282,5 +286,13 @@
     {
         "key": "shift+space f",
         "command": "list.toggleFilterOnType"
+    },
+    {
+        "key": "shift+space shift+t",
+        "command": "workbench.action.tasks.test"
+    },
+    {
+        "key": "shift+space shift+q",
+        "command": "workbench.action.tasks.runTask"
     },
 ]
