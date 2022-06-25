@@ -15,23 +15,23 @@ end
 
 # fzf
 export FZF_DEFAULT_OPTS='--reverse'
-function __fzf_z -d 'Find and Jump to a recent directory.'
-  set -l query (commandline)
-
-  if test -n $query
-    set flags --query "$query"
-  end
-
-  z -l | awk '{ print $2 }' | eval (__fzfcmd) "$FZF_DEFAULT_OPTS $flags" | read recent
-  if [ $recent ]
-      cd $recent
-      commandline -r ''
-      commandline -f repaint
-  end
-end
-bind \cz __fzf_z
-#bind \cx __fzf_cd
-bind ç __fzf_cd
+# function __fzf_z -d 'Find and Jump to a recent directory.'
+#   set -l query (commandline)
+#
+#   if test -n $query
+#     set flags --query "$query"
+#   end
+#
+#   z -l | awk '{ print $2 }' | eval (__fzfcmd) "$FZF_DEFAULT_OPTS $flags" | read recent
+#   if [ $recent ]
+#       cd $recent
+#       commandline -r ''
+#       commandline -f repaint
+#   end
+# end
+# bind \cz __fzf_z
+# #bind \cx __fzf_cd
+# bind ç __fzf_cd
 
 function __fzf_open_code -d 'Open file with Code.'
   code -r $(fzf)
@@ -79,3 +79,7 @@ if test -e ~/cmd/start_tmux.sh
     bash ~/cmd/start_tmux.sh
 end
 
+# zoxide
+zoxide init fish | source
+set -x _ZO_DATA_DIR ~/.local/share/zoxide
+export _ZO_FZF_OPTS='--reverse --height 60% --preview "echo {} |awk \'{print $2}\' | xargs ls"'
