@@ -129,9 +129,9 @@ xmap [Denite] <Nop>
 xmap <Leader>d [Denite]
 xnoremap <silent> [Denite]y :Denite neoyank register -default-action=replace<CR>
 
-if dein#tap('vim-quickrun')
-    nnoremap <leader>r :QuickRun<CR>
-endif
+" if dein#tap('vim-quickrun')
+    " nnoremap <leader>r :QuickRun<CR>
+" endif
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " COMMAND MODE
 
