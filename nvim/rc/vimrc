@@ -15,12 +15,11 @@ let g:tools_path = 'C:\tools'
 
 let s:rc_dir = fnamemodify(expand('<sfile>'), ':h')
 
-" dein
-" execute 'source' s:rc_dir . '/bundle.vim'
-" if dein#tap('Alduin')
-"     colorscheme alduin
-" endif
+" jetpack-vim
 execute 'source' s:rc_dir . '/plugin.vim'
+if jetpack#tap('Alduin')
+   colorscheme alduin
+endif
 
 " base
 execute 'source' s:rc_dir . '/base.vim'

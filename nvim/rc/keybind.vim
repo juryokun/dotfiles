@@ -47,9 +47,6 @@ nnoremap <Leader>] ^v$<Left>
 nnoremap <C-j> 4j
 nnoremap <C-k> 4k
 
-" cheat sheet
-nnoremap <silent> <Leader>ch :Cheat<CR>
-
 " manipulate tab
 nmap [Tab] <Nop>
 nmap <Leader>t [Tab]
@@ -91,47 +88,10 @@ function! s:AutoMarkrement()
     echo 'marked' g:markrement_char[b:markrement_pos]
 endfunction
 
-" vimfiler setting
-" nnoremap <Leader>vf :VimFiler -split -no-quit -winwidth=45 -simple
+nmap <Leader>; <Plug>(jumpcursor-jump)
 
-" Open Defx
-nnoremap <silent> <leader>e :Defx -resume<CR>
-nnoremap <silent> <leader>E :Defx -split=vertical -winwidth=50 -direction=topleft -toggle -resume<CR>
-nnoremap <silent> <leader>w :Defx `expand('%:p:h')` -search=expand('%:p')`<CR>
-nnoremap <silent> <leader>W :Defx -split=vertical -winwidth=50 -direction=topleft -toggle `expand('%:p:h')` -search=expand('%:p')`<CR>
-
-" denite setting
-nmap [Denite] <Nop>
-nmap <Leader>d [Denite]
-nnoremap <silent> [Denite]b :Denite buffer -buffer-name=buf<CR>
-nnoremap <silent> [Denite]r :Denite -resume<CR>
-nnoremap <silent> [Denite]gr :Denite -resume -buffer-name=dgrep<CR>
-nnoremap <silent> [Denite]d :Denite directory_rec<CR>
-nnoremap <silent> [Denite]f :Denite file<CR>
-nnoremap <silent> [Denite]D :Denite file/rec<CR>
-nnoremap <silent> [Denite]F :DeniteBufferDir file<CR>
-nnoremap <silent> [Denite]pf :DeniteProjectDir file<CR>
-nnoremap <silent> [Denite]pd :DeniteProjectDir directory_rec<CR>
-nnoremap <silent> [Denite]; :DeniteCursorWord line<CR>
-nnoremap <silent> [Denite]l :Denite line<CR>
-nnoremap <silent> [Denite]m :Denite menu<CR>
-nnoremap <silent> [Denite]c :Denite menu:commands<CR>
-nnoremap <silent> [Denite]o :Denite outline<CR>
-nnoremap <silent> [Denite]O :DeniteCursorWord outline<CR>
-nnoremap <silent> [Denite]] :DeniteCursorWord gtags_context<CR>
-nnoremap <silent> [Denite]y :Denite neoyank register<CR>
-nnoremap <silent> [Denite]h :Denite file/old<CR>
-nnoremap <silent> [Denite]e :Denite defx/history<CR>
-nnoremap <silent> [Denite]a :Denite change<CR>
-nnoremap <silent> [Denite]M :Denite mark<CR>
-
-xmap [Denite] <Nop>
-xmap <Leader>d [Denite]
-xnoremap <silent> [Denite]y :Denite neoyank register -default-action=replace<CR>
-
-" if dein#tap('vim-quickrun')
-    " nnoremap <leader>r :QuickRun<CR>
-" endif
+"nmap [Ddu] <Nop>
+"nmap <Leader>d [Ddu]
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " COMMAND MODE
 
@@ -160,24 +120,22 @@ endfunction
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " TERMINAL SETTINGS
 
-if has('nvim')
-    " open terminal
-    if executable('fish')
-        nnoremap <silent> <Leader>lb :botright split<CR>:terminal fish<CR>i
-        nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal fish<CR>i
-    else
-        nnoremap <silent> <Leader>lb :botright split<CR>:terminal<CR>i
-        nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal<CR>i
-    endif
-
-    " TERMINAL MODE
-    tnoremap <C-\><C-\> <C-\><C-n>
-    tnoremap <C-q> <C-\><C-n>:q<CR>
-
-    " manipulate window
-    tnoremap <A-h> <C-\><C-n><C-w>h
-    tnoremap <A-j> <C-\><C-n><C-w>j
-    tnoremap <A-k> <C-\><C-n><C-w>k
-    tnoremap <A-l> <C-\><C-n><C-w>l
-    tnoremap <A-o> <C-\><C-n><C-w>w
+" open terminal
+if executable('fish')
+    nnoremap <silent> <Leader>lb :botright split<CR>:terminal fish<CR>i
+    nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal fish<CR>i
+else
+    nnoremap <silent> <Leader>lb :botright split<CR>:terminal<CR>i
+    nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal<CR>i
 endif
+
+" TERMINAL MODE
+tnoremap <C-\><C-\> <C-\><C-n>
+tnoremap <C-q> <C-\><C-n>:q<CR>
+
+" manipulate window
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+tnoremap <A-o> <C-\><C-n><C-w>w

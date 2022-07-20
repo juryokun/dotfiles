@@ -1,38 +1,4 @@
-let s:jetpackpath = fnamemodify(expand('<sfile>'), ':h') . '/../packages'
-execute 'set packpath=' . s:jetpackpath
-
-let s:jetpackfile = s:jetpackpath . '/pack/jetpack-src/opt/vim-jetpack/plugin/jetpack.vim'
-let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
-if !filereadable(s:jetpackfile)
-  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
-endif
-
-packadd vim-jetpack
-
-call jetpack#begin(s:jetpackpath)
-Jetpack 'machakann/vim-sandwich'
-Jetpack 'vim-denops/denops.vim'
-Jetpack 'Shougo/ddu.vim'
-Jetpack 'Shougo/ddu-ui-ff'
-Jetpack 'Shougo/ddu-source-file'
-Jetpack 'Shougo/ddu-source-register'
-Jetpack 'kuuote/ddu-source-mr'
-Jetpack 'lambdalisue/mr.vim'
-Jetpack 'shun/ddu-source-buffer'
-Jetpack 'Shougo/ddu-filter-matcher_substring'
-Jetpack 'Shougo/ddu-commands.vim'
-Jetpack 'Shougo/ddu-kind-file'
-Jetpack 'shun/ddu-source-rg'
-call jetpack#end()
-
-for name in jetpack#names()
-  if !jetpack#tap(name)
-    call jetpack#sync()
-    break
-  endif
-endfor
-
-
+"ddu-setting
 call ddu#custom#patch_global({
     \   'ui': 'ff',
     \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
@@ -44,6 +10,9 @@ call ddu#custom#patch_global({
     \   'kindOptions': {
     \     'file': {
     \       'defaultAction': 'open',
+    \     },
+    \     'word': {
+    \       'defaultAction': 'append',
     \     },
     \   },
     \   'sourceParams' : {
@@ -81,11 +50,13 @@ function! s:ddu_filter_my_settings() abort
 endfunction
 
 "ddu keymapping.
-nnoremap <SID>[ug] <Nop>
-nmap ,u <SID>[ug]
+let mapleader = "\<Space>"
 
-nnoremap <silent> <SID>[ug]m :<C-u>Ddu mr<CR>
-nnoremap <silent> <SID>[ug]b :<C-u>Ddu buffer<CR>
-nnoremap <silent> <SID>[ug]r :<C-u>Ddu register<CR>
-nnoremap <silent> <SID>[ug]n :<C-u>Ddu file -source-param-new -volatile<CR>
-nnoremap <silent> <SID>[ug]f :<C-u>Ddu file<CR>
+nnoremap [Ddu] <Nop>
+nmap <Leader>d [Ddu]
+
+nnoremap <silent> [Ddu]m :<C-u>Ddu mr<CR>
+nnoremap <silent> [Ddu]b :<C-u>Ddu buffer<CR>
+nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
+nnoremap <silent> [Ddu]n :<C-u>Ddu file -source-param-new -volatile<CR>
+nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
