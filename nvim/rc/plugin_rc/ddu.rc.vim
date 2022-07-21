@@ -22,9 +22,45 @@ call ddu#custom#patch_global({
     \   },
     \ })
 
+call ddu#custom#patch_local('fx', {
+    \   'ui': 'filer',
+    \   'sources': [{'name': 'file', 'params': {}}],
+    \   'sourceOptions': {
+    \     '_': {
+    \       'columns': ['filename'],
+    \     },
+    \   },
+    \   'kindOptions': {
+    \     'file': {
+    \       'defaultAction': 'open',
+    \     },
+    \   }
+    \ })
+
+call ddu#custom#patch_local('fx-left', {
+    \   'ui': 'filer',
+    \   'uiParams': {
+    \     'filer': {
+    \       'split': 'vertical',
+    \       'splitDirection': 'topleft',
+    \     },
+    \   },
+    \   'sources': [{'name': 'file', 'params': {}}],
+    \   'sourceOptions': {
+    \     '_': {
+    \       'columns': ['filename'],
+    \     },
+    \   },
+    \   'kindOptions': {
+    \     'file': {
+    \       'defaultAction': 'open',
+    \     },
+    \   }
+    \ })
+
 "ddu-key-setting
-autocmd FileType ddu-ff call s:ddu_my_settings()
-function! s:ddu_my_settings() abort
+autocmd FileType ddu-ff call s:ddu_ff_my_settings()
+function! s:ddu_ff_my_settings() abort
   nnoremap <buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
   nnoremap <buffer><silent> <Space>
@@ -49,14 +85,32 @@ function! s:ddu_filter_my_settings() abort
   \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
 endfunction
 
+
+autocmd FileType ddu-filer call s:ddu_filer_my_settings()
+function! s:ddu_filer_my_settings() abort
+  nnoremap <buffer><silent> <CR>
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+  nnoremap <buffer><silent> <Space>
+        \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
+  nnoremap <buffer> o
+        \ <Cmd>call ddu#ui#filer#do_action('expandItem',
+        \ {'mode': 'toggle'})<CR>
+  nnoremap <buffer><silent> q
+        \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+endfunction
+
+
 "ddu keymapping.
 let mapleader = "\<Space>"
 
 nnoremap [Ddu] <Nop>
 nmap <Leader>d [Ddu]
 
-nnoremap <silent> [Ddu]m :<C-u>Ddu mr<CR>
+nnoremap <silent> [Ddu]h :<C-u>Ddu mr<CR>
 nnoremap <silent> [Ddu]b :<C-u>Ddu buffer<CR>
 nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
 nnoremap <silent> [Ddu]n :<C-u>Ddu file -source-param-new -volatile<CR>
 nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
+nnoremap <silent> [Ddu]F :<C-u>Ddu file_rec<CR>
+nnoremap <silent> [Ddu]e :<C-u>Ddu -name=fx<CR>
+nnoremap <silent> [Ddu]E :<C-u>Ddu -name=fx-left<CR>
