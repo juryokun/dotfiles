@@ -22,19 +22,19 @@ call ddu#custom#patch_global({
     \   },
     \ })
 
+let s:fx_conf_sources = [{'name': 'file', 'params': {}}]
+let s:fx_conf_sourceOptions = {'_': {'columns': ['filename']}}
+let s:fx_conf_kindOptions = {'file': {'defaultAction': 'open'}}
 call ddu#custom#patch_local('fx', {
     \   'ui': 'filer',
-    \   'sources': [{'name': 'file', 'params': {}}],
-    \   'sourceOptions': {
-    \     '_': {
-    \       'columns': ['filename'],
+    \   'uiParams': {
+    \     'filer': {
+    \       'split': 'no',
     \     },
     \   },
-    \   'kindOptions': {
-    \     'file': {
-    \       'defaultAction': 'open',
-    \     },
-    \   }
+    \   'sources': s:fx_conf_sources,
+    \   'sourceOptions': s:fx_conf_sourceOptions,
+    \   'kindOptions': s:fx_conf_kindOptions,
     \ })
 
 call ddu#custom#patch_local('fx-left', {
@@ -43,19 +43,12 @@ call ddu#custom#patch_local('fx-left', {
     \     'filer': {
     \       'split': 'vertical',
     \       'splitDirection': 'topleft',
+    \       'winWidth': &columns / 3,
     \     },
     \   },
-    \   'sources': [{'name': 'file', 'params': {}}],
-    \   'sourceOptions': {
-    \     '_': {
-    \       'columns': ['filename'],
-    \     },
-    \   },
-    \   'kindOptions': {
-    \     'file': {
-    \       'defaultAction': 'open',
-    \     },
-    \   }
+    \   'sources': s:fx_conf_sources,
+    \   'sourceOptions': s:fx_conf_sourceOptions,
+    \   'kindOptions': s:fx_conf_kindOptions,
     \ })
 
 "ddu-key-setting
@@ -112,5 +105,5 @@ nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
 nnoremap <silent> [Ddu]n :<C-u>Ddu file -source-param-new -volatile<CR>
 nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
 nnoremap <silent> [Ddu]F :<C-u>Ddu file_rec<CR>
-nnoremap <silent> [Ddu]e :<C-u>Ddu -name=fx<CR>
-nnoremap <silent> [Ddu]E :<C-u>Ddu -name=fx-left<CR>
+nnoremap <silent> <Leader>E :<C-u>Ddu -name=fx-left<CR>
+nnoremap <silent> <Leader>e :<C-u>Ddu -name=fx<CR>

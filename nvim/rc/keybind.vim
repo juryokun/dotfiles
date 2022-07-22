@@ -88,8 +88,6 @@ function! s:AutoMarkrement()
     echo 'marked' g:markrement_char[b:markrement_pos]
 endfunction
 
-nmap <Leader>; <Plug>(jumpcursor-jump)
-
 "nmap [Ddu] <Nop>
 "nmap <Leader>d [Ddu]
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -139,3 +137,6 @@ tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 tnoremap <A-o> <C-\><C-n><C-w>w
+
+let g:sandwich_no_default_key_mappings = 1
+

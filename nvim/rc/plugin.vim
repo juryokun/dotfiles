@@ -15,6 +15,10 @@ if jetpack#tap('ddu.vim')
     execute 'source' s:plugin_rc_dir . '/ddu.rc.vim'
 endif
 
+if jetpack#tap('vim-sandwich')
+    execute 'source' s:plugin_rc_dir . '/vim-sandwich.rc.vim'
+endif
+
 if jetpack#tap('lightline.vim')
     execute 'source' s:plugin_rc_dir . '/lightline.rc.vim'
 endif

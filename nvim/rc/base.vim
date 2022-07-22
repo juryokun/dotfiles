@@ -5,7 +5,7 @@ set noswapfile
 set nobackup
 set noundofile
 set ruler
-set number
+set relativenumber
 set hidden
 set laststatus=2
 set showmode
