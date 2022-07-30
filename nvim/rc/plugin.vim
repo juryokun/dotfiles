@@ -22,3 +22,15 @@ endif
 if jetpack#tap('lightline.vim')
     execute 'source' s:plugin_rc_dir . '/lightline.rc.vim'
 endif
+
+if jetpack#tap('indent-blankline.nvim')
+    execute 'source' s:plugin_rc_dir . '/indent-blankline.rc.vim'
+endif
+
+if jetpack#tap('mason.nvim')
+    execute 'source' s:plugin_rc_dir . '/mason.rc.vim'
+endif
+
+if jetpack#tap('ddc.vim')
+    execute 'source' s:plugin_rc_dir . '/ddc.rc.vim'
+endif
