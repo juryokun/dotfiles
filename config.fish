@@ -10,6 +10,8 @@ if status is-interactive
     end
 end
 
+export GPG_TTY=$(TTY)
+
 # fisher
 set fish_theme bobthefish
 set theme_color_scheme zenburn
