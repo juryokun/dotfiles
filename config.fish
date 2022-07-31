@@ -1,5 +1,14 @@
 # fish setting
 # umask 022
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+    # ・
+    # ・（他にコマンドがあればここに記述されているはず）
+    # ・
+    if test "$(uname)"='Darwin'
+        eval (/opt/homebrew/bin/brew shellenv) # <= これを追加
+    end
+end
 
 # fisher
 set fish_theme bobthefish
