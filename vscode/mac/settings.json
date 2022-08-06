@@ -2,9 +2,9 @@
     /* 共通設定 */
     "window.zoomLevel": 0,
     "debug.allowBreakpointsEverywhere": true,
-    "editor.fontFamily": "HackGen",
+    "editor.fontFamily": "PlemolJP",
     "editor.fontSize": 14,
-    "terminal.integrated.fontFamily": "HackGen Console",
+    "terminal.integrated.fontFamily": "PlemolJP Console NF",
     "terminal.integrated.fontSize": 13,
     "vim.easymotion": false,
     "vim.sneak": true,
