@@ -34,3 +34,8 @@ endif
 if jetpack#tap('ddc.vim')
     execute 'source' s:plugin_rc_dir . '/ddc.rc.vim'
 endif
+
+if jetpack#tap('fuzzy-motion.vim')
+    execute 'source' s:plugin_rc_dir . '/fuzzy-motion.rc.vim'
+endif
+

@@ -287,4 +287,19 @@
         "key": "shift+space f",
         "command": "list.toggleFilterOnType"
     },
+    {
+        "key": "u",
+        "command": "undo",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
+    {
+        "key": "ctrl+r",
+        "command": "redo",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    }
 ]

@@ -138,5 +138,3 @@ tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
 tnoremap <A-o> <C-\><C-n><C-w>w
 
-let g:sandwich_no_default_key_mappings = 1
-
