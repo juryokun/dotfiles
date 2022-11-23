@@ -266,5 +266,25 @@
         "key": "ctrl+]",
         "command": "editor.action.revealDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-    }
+    },
+    {
+        "key": "ctrl+f",
+        "command": "vscode-neovim.ctrl-f",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
+    {
+        "key": "ctrl+b",
+        "command": "vscode-neovim.ctrl-b",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
+    {
+        "key": "ctrl+d",
+        "command": "vscode-neovim.ctrl-d",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
+    {
+        "key": "ctrl+u",
+        "command": "vscode-neovim.ctrl-u",
+        "when": "editorTextFocus && neovim.mode == normal",
+    },
 ]
