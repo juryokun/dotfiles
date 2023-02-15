@@ -25,7 +25,6 @@ Jetpack 'Shougo/ddc-around'
 Jetpack 'Shougo/ddc-matcher_head'
 Jetpack 'Shougo/ddc-sorter_rank'
 Jetpack 'Shougo/ddc-nvim-lsp'
-Jetpack 'Shougo/ddc-ui-pum',
 Jetpack 'Shougo/ddc-ui-native',
 
 " lsp
