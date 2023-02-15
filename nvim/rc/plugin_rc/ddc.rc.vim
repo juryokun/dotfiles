@@ -1,7 +1,10 @@
 call ddc#custom#patch_global('ui', 'native')
 call ddc#custom#patch_global('sources', ['nvim-lsp'])
 call ddc#custom#patch_global('sourceOptions', {
-      \ '_': { 'matchers': ['matcher_head'] },
+      \ '_': { 
+      \     'matchers': ['matcher_head'],
+      \     'sorters': ['sorter_rank'],
+      \ },
       \ 'nvim-lsp': {
       \   'mark': 'lsp',
       \   'forceCompletionPattern': '\.\w*|:\w*|->\w*' },
