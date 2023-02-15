@@ -23,13 +23,14 @@ call ddu#custom#patch_global({
     \ })
 
 let s:fx_conf_sources = [{'name': 'file', 'params': {}}]
-let s:fx_conf_sourceOptions = {'_': {'columns': ['filename']}}
+let s:fx_conf_sourceOptions = {'_': {'columns': ['icon_filename']}}
 let s:fx_conf_kindOptions = {'file': {'defaultAction': 'open'}}
 call ddu#custom#patch_local('fx', {
     \   'ui': 'filer',
     \   'uiParams': {
     \     'filer': {
     \       'split': 'no',
+    \       'sortTreesFirst': v:true,
     \     },
     \   },
     \   'sources': s:fx_conf_sources,
@@ -42,6 +43,7 @@ call ddu#custom#patch_local('fx-left', {
     \   'uiParams': {
     \     'filer': {
     \       'split': 'vertical',
+    \       'sortTreesFirst': v:true,
     \       'splitDirection': 'topleft',
     \       'winWidth': &columns / 3,
     \     },
@@ -66,16 +68,10 @@ endfunction
 
 autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
 function! s:ddu_filter_my_settings() abort
-  nnoremap <buffer> <CR>
-  \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> q
-  \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
-  inoremap <buffer> <CR>
-  \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  inoremap <buffer> <C-j>
-  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')+1,0)")<CR>
-  inoremap <buffer> <C-k>
-  \ <Cmd>call ddu#ui#ff#execute("call cursor(line('.')-1,0)")<CR>
+    inoremap <buffer> <CR>
+        \ <Esc><Cmd>call ddu#ui#ff#close()<CR>
+    nnoremap <buffer> <CR>
+        \ <Cmd><Cmd>call ddu#ui#ff#close()<CR>
 endfunction
 
 
