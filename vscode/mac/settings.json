@@ -112,8 +112,5 @@
             "description": "Insert file extension.",
             "format": "md"
         }
-    ],
-    "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/nvim/init.vim",
-    "vscode-neovim.useCtrlKeysForNormalMode": false,
+    ]
 }

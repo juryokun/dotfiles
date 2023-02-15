@@ -22,6 +22,11 @@
         "when": "editorFocus"
     },
     {
+        "key": "space q",
+        "command": "workbench.action.quickOpen",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
         "key": "cmd+p",
         "command": "-workbench.action.quickOpen"
     },
@@ -52,8 +57,18 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
+        "key": "space b",
+        "command": "workbench.action.showAllEditors",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
         "key": "alt+cmd+tab",
         "command": "-workbench.action.showAllEditors"
+    },
+    {
+        "key": "space e",
+        "command": "workbench.view.explorer",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
     },
     {
         "key": "shift+cmd+e",
@@ -120,6 +135,26 @@
         "when": "listFocus && !inputFocus"
     },
     // タブ移動
+    {
+        "key": "space h",
+        "command": "workbench.action.previousEditor",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space l",
+        "command": "workbench.action.nextEditor",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space ]",
+        "command": "workbench.action.gotoSymbol",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
+    {
+        "key": "space ctrl+]",
+        "command": "workbench.action.showAllSymbols",
+        "when": "vim.mode == 'Normal' && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen || !inputFocus && !terminalFocus && !inputBoxFocus && !inFilesPicker && !inQuickOpen"
+    },
     {
         "key": "cmd+t",
         "command": "-workbench.action.showAllSymbols"
@@ -253,38 +288,8 @@
         "command": "list.toggleFilterOnType"
     },
     {
-        "key": "u",
-        "command": "undo",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
-    {
-        "key": "ctrl+r",
-        "command": "redo",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
-    {
         "key": "ctrl+]",
         "command": "editor.action.revealDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
-    },
-    {
-        "key": "ctrl+f",
-        "command": "vscode-neovim.ctrl-f",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
-    {
-        "key": "ctrl+b",
-        "command": "vscode-neovim.ctrl-b",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
-    {
-        "key": "ctrl+d",
-        "command": "vscode-neovim.ctrl-d",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
-    {
-        "key": "ctrl+u",
-        "command": "vscode-neovim.ctrl-u",
-        "when": "editorTextFocus && neovim.mode == normal",
-    },
+    }
 ]
