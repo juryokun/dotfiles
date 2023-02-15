@@ -12,7 +12,9 @@ packadd vim-jetpack
 
 let s:plugin_rc_dir = s:rc_dir . '/plugin_rc'
 call jetpack#begin(s:jetpackpath)
-if has('win32')
+if exists('g:vscode')
+  execute 'source' s:plugin_rc_dir . '/jetpack_vscode.rc.vim'
+elseif has('win32')
   execute 'source' s:plugin_rc_dir . '/jetpack_win.rc.vim'
 else
   execute 'source' s:plugin_rc_dir . '/jetpack_default.rc.vim'

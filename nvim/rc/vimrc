@@ -26,6 +26,9 @@ execute 'source' s:rc_dir . '/base.vim'
 
 " keybind
 execute 'source' s:rc_dir . '/keybind.vim'
+if exists('g:vscode')
+  execute 'source' s:rc_dir . '/keybind_vscode.vim'
+endif
 
 " function
 execute 'source' s:rc_dir . '/func.vim'

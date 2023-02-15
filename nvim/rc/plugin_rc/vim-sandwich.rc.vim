@@ -1,3 +1,5 @@
+let g:sandwich_no_default_key_mappings = 1
+
 " add
 nmap za <Plug>(sandwich-add)
 xmap za <Plug>(sandwich-add)

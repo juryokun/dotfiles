@@ -287,4 +287,9 @@
         "key": "shift+space f",
         "command": "list.toggleFilterOnType"
     },
+    {
+        "key": "ctrl+]",
+        "command": "editor.action.revealDefinition",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    }
 ]
