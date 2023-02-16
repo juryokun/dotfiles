@@ -128,3 +128,5 @@ let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 "         autocmd InsertLeave * :call system('AutoHotkeyU64.exe "'.g:tools_path.'\ImeDisable.ahk"')
 "     augroup END
 " endif
+"
+call setcellwidths([[ 0x25A0, 0x25ff, 2 ]])
