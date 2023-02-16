@@ -129,4 +129,6 @@ let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 "     augroup END
 " endif
 "
-call setcellwidths([[ 0x25A0, 0x25ff, 2 ]])
+
+" https://orange-factory.com/dnf/utf-8.html
+call setcellwidths([[ 0x25A0, 0x25ff, 2 ], [ 0x203b, 0x203b, 2 ], [ 0x2460, 0x24ff, 2 ], [ 0x2190, 0x2199, 2 ]])
