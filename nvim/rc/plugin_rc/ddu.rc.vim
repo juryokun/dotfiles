@@ -31,6 +31,7 @@ call ddu#custom#patch_local('fx', {
     \     'filer': {
     \       'split': 'no',
     \       'sortTreesFirst': v:true,
+    \       'sort': 'filename',
     \     },
     \   },
     \   'sources': s:fx_conf_sources,
@@ -44,6 +45,7 @@ call ddu#custom#patch_local('fx-left', {
     \     'filer': {
     \       'split': 'vertical',
     \       'sortTreesFirst': v:true,
+    \       'sort': 'filename',
     \       'splitDirection': 'topleft',
     \       'winWidth': &columns / 3,
     \     },
@@ -51,6 +53,19 @@ call ddu#custom#patch_local('fx-left', {
     \   'sources': s:fx_conf_sources,
     \   'sourceOptions': s:fx_conf_sourceOptions,
     \   'kindOptions': s:fx_conf_kindOptions,
+    \ })
+
+call ddu#custom#patch_local('grep', {
+    \   'sourceParams' : {
+    \     'rg' : {
+    \       'args': ['--column', '--no-heading', '--color', 'never'],
+    \     },
+    \   },
+    \   'uiParams': {
+    \     'ff': {
+    \       'startFilter': v:false,
+    \     }
+    \   },
     \ })
 
 "ddu-key-setting
@@ -77,15 +92,33 @@ endfunction
 
 autocmd FileType ddu-filer call s:ddu_filer_my_settings()
 function! s:ddu_filer_my_settings() abort
-  nnoremap <buffer><silent> <CR>
-        \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> <Space>
+    nnoremap <buffer><silent> <CR>
+            \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
+    nnoremap <buffer><silent> <Space>
         \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
-  nnoremap <buffer> o
+    nnoremap <buffer> o
         \ <Cmd>call ddu#ui#filer#do_action('expandItem',
         \ {'mode': 'toggle'})<CR>
-  nnoremap <buffer><silent> q
+    nnoremap <buffer><silent> q
         \ <Cmd>call ddu#ui#filer#do_action('quit')<CR>
+    nnoremap <buffer><silent> ..
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'narrow', 'params': {'path': '..'}})<CR>
+    nnoremap <buffer><silent> c
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'copy'})<CR>
+    nnoremap <buffer><silent> p
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'paste'})<CR>
+    nnoremap <buffer><silent> dd
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'delete'})<CR>
+    nnoremap <buffer><silent> r
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'rename'})<CR>
+    nnoremap <buffer><silent> mv
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'move'})<CR>
+    nnoremap <buffer><silent> tf
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newFile'})<CR>
+    nnoremap <buffer><silent> td
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'newDirectory'})<CR>
+    nnoremap <buffer><silent> yy
+        \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'yank'})<CR>
 endfunction
 
 
@@ -99,7 +132,18 @@ nnoremap <silent> [Ddu]h :<C-u>Ddu mr<CR>
 nnoremap <silent> [Ddu]b :<C-u>Ddu buffer<CR>
 nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
 nnoremap <silent> [Ddu]n :<C-u>Ddu file -source-param-new -volatile<CR>
-nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
+"nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
 nnoremap <silent> [Ddu]F :<C-u>Ddu file_rec<CR>
+nnoremap <silent> [Ddu]g :<C-u>call ddu#start({
+    \   'name': 'grep',
+    \   'sources':[
+    \     {'name': 'rg', 'params': {'input': expand('<cword>')}}
+    \   ],
+    \})<CR>
+
 nnoremap <silent> <Leader>E :<C-u>Ddu -name=fx-left<CR>
 nnoremap <silent> <Leader>e :<C-u>Ddu -name=fx<CR>
+nnoremap <silent> <Leader>r <Cmd>call ddu#start({
+\   'name': 'fx',
+\   'searchPath': expand("%:p"),
+\ })<CR>
