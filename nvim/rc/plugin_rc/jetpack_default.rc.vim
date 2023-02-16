@@ -45,3 +45,4 @@ Jetpack 'airblade/vim-gitgutter'
 Jetpack 'MetalPhaeton/easybracket-vim'
 Jetpack 'lukas-reineke/indent-blankline.nvim'
 Jetpack 'yuki-yano/fuzzy-motion.vim'
+Jetpack 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npm install' }
