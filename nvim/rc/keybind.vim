@@ -31,12 +31,12 @@ inoremap <A-o> <ESC><C-w>w
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " NORMAL MODE
 
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b <Cmd>bnext<CR>
+nnoremap <silent> [b <Cmd>bprevious<CR>
 nnoremap <silent> + <C-a>
 nnoremap <silent> - <C-x>
-nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
-nnoremap <silent> * "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+nnoremap <silent> <Esc><Esc> <Cmd>nohlsearch<CR>
+nnoremap <silent> * "zyiw:let @/ = '\<' . @z . '\>'<CR><Cmd>set hlsearch<CR>
 nnoremap <silent> gp "+p
 
 nnoremap <Leader>c/ :%s //&/gn<CR>
@@ -47,16 +47,18 @@ nnoremap <Leader>] ^v$<Left>
 nnoremap <C-j> 4j
 nnoremap <C-k> 4k
 
+nnoremap <Leader>; <Cmd>source $MYVIMRC<CR>
+
 " manipulate tab
 nmap [Tab] <Nop>
 nmap <Leader>t [Tab]
-nnoremap [Tab]n :$tabnew<CR>
-nnoremap [Tab]l :tabnext<CR>
-nnoremap [Tab]h :tabprevious<CR>
-nnoremap [Tab]x :tabclose<CR>
-nnoremap [Tab]o :tabonly<CR>
+nnoremap [Tab]n <Cmd>$tabnew<CR>
+nnoremap [Tab]l <Cmd>tabnext<CR>
+nnoremap [Tab]h <Cmd>tabprevious<CR>
+nnoremap [Tab]x <Cmd>tabclose<CR>
+nnoremap [Tab]o <Cmd>tabonly<CR>
 for n in range (1, 9)
-    execute 'nnoremap <silent> [Tab]'.n ':<C-u>tabnext'.n.'<CR>'
+    execute 'nnoremap <silent> [Tab]'.n '<Cmd>tabnext'.n.'<CR>'
 endfor
 
 " manipulate window
@@ -71,7 +73,7 @@ nnoremap [Mark] <Nop>
 nmap m [Mark]
 nnoremap [Mark]n ]`
 nnoremap [Mark]p [`
-nnoremap <silent> [Mark]m :<C-u>call <SID>AutoMarkrement()<CR>
+nnoremap <silent> [Mark]m <Cmd>call <SID>AutoMarkrement()<CR>
 if !exists('g:markrement_char')
     let g:markrement_char = [
     \     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
@@ -120,11 +122,11 @@ endfunction
 
 " open terminal
 if executable('fish')
-    nnoremap <silent> <Leader>lb :botright split<CR>:terminal fish<CR>i
-    nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal fish<CR>i
+    nnoremap <silent> <Leader>lb <Cmd>botright split<CR><Cmd>terminal fish<CR>i
+    nnoremap <silent> <Leader>lt <Cmd>$tabnew<CR><Cmd>terminal fish<CR>i
 else
-    nnoremap <silent> <Leader>lb :botright split<CR>:terminal<CR>i
-    nnoremap <silent> <Leader>lt :$tabnew<CR>:terminal<CR>i
+    nnoremap <silent> <Leader>lb <Cmd>botright split<CR><Cmd>terminal<CR>i
+    nnoremap <silent> <Leader>lt <Cmd>$tabnew<CR><Cmd>terminal<CR>i
 endif
 
 " TERMINAL MODE

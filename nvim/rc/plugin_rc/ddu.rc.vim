@@ -5,6 +5,7 @@ call ddu#custom#patch_global({
     \   'sourceOptions': {
     \     '_': {
     \       'matchers': ['matcher_substring'],
+    \       'ignoreCase': v:true,
     \     },
     \   },
     \   'kindOptions': {
@@ -20,6 +21,16 @@ call ddu#custom#patch_global({
     \       'args': ['--column', '--no-heading', '--color', 'never'],
     \     },
     \   },
+    \   'uiParams': {
+    \     'ff': {
+    \       'prompt': '>',
+    \     },
+    \   },
+    \   'filterParams': {
+    \      'matcher_substring': {
+    \          'highlightMatched': 'Search',
+    \      },
+    \   },
     \ })
 
 let s:fx_conf_sources = [{'name': 'file', 'params': {}}]
@@ -34,22 +45,8 @@ call ddu#custom#patch_local('fx', {
     \       'sort': 'filename',
     \     },
     \   },
-    \   'sources': s:fx_conf_sources,
-    \   'sourceOptions': s:fx_conf_sourceOptions,
-    \   'kindOptions': s:fx_conf_kindOptions,
-    \ })
-
-call ddu#custom#patch_local('fx-left', {
-    \   'ui': 'filer',
-    \   'uiParams': {
-    \     'filer': {
-    \       'split': 'vertical',
-    \       'sortTreesFirst': v:true,
-    \       'sort': 'filename',
-    \       'splitDirection': 'topleft',
-    \       'winWidth': &columns / 3,
-    \     },
-    \   },
+    \   'refresh' : v:true,
+    \   'resume' : v:true,
     \   'sources': s:fx_conf_sources,
     \   'sourceOptions': s:fx_conf_sourceOptions,
     \   'kindOptions': s:fx_conf_kindOptions,
@@ -71,13 +68,13 @@ call ddu#custom#patch_local('grep', {
 "ddu-key-setting
 autocmd FileType ddu-ff call s:ddu_ff_my_settings()
 function! s:ddu_ff_my_settings() abort
-  nnoremap <buffer><silent> <CR>
+    nnoremap <buffer><silent> <CR>
         \ <Cmd>call ddu#ui#ff#do_action('itemAction')<CR>
-  nnoremap <buffer><silent> <Space>
+    nnoremap <buffer><silent> <Space><Space>
         \ <Cmd>call ddu#ui#ff#do_action('toggleSelectItem')<CR>
-  nnoremap <buffer><silent> i
+    nnoremap <buffer><silent> i
         \ <Cmd>call ddu#ui#ff#do_action('openFilterWindow')<CR>
-  nnoremap <buffer><silent> q
+    nnoremap <buffer><silent> q
         \ <Cmd>call ddu#ui#ff#do_action('quit')<CR>
 endfunction
 
@@ -89,12 +86,11 @@ function! s:ddu_filter_my_settings() abort
         \ <Cmd><Cmd>call ddu#ui#ff#close()<CR>
 endfunction
 
-
 autocmd FileType ddu-filer call s:ddu_filer_my_settings()
 function! s:ddu_filer_my_settings() abort
     nnoremap <buffer><silent> <CR>
             \ <Cmd>call ddu#ui#filer#do_action('itemAction')<CR>
-    nnoremap <buffer><silent> <Space>
+    nnoremap <buffer><silent> <Space><Space>
         \ <Cmd>call ddu#ui#filer#do_action('toggleSelectItem')<CR>
     nnoremap <buffer> o
         \ <Cmd>call ddu#ui#filer#do_action('expandItem',
@@ -121,6 +117,39 @@ function! s:ddu_filer_my_settings() abort
         \ <Cmd>call ddu#ui#filer#do_action('itemAction', {'name': 'yank'})<CR>
 endfunction
 
+command! DduRgLive call <SID>ddu_rg_live()
+function! s:ddu_rg_live() abort
+    call ddu#start({
+        \   'name': 'grep',
+        \   'volatile': v:true,
+        \   'sources': [{
+        \     'name': 'rg',
+        \     'options': {'matchers': []},
+        \   }],
+        \   'uiParams': {'ff': {
+        \     'ignoreEmpty': v:false,
+        \     'autoResize': v:false,
+        \   }},
+        \   'resume' : v:false
+        \ })
+endfunction
+
+
+command! DduCustomGrep call <SID>ddu_custom_grep()
+function! s:ddu_custom_grep() abort
+    let grep_text = input("search-word : ")
+    if grep_text == ""
+        let grep_text = expand('<cword>')
+    endif
+    let search_path = input("search-path : ")
+    call ddu#start({
+        \   'name': 'grep',
+        \   'sources':[
+        \     {'name': 'rg', 'params': {'input': grep_text, 'path': search_path}}
+        \   ],
+        \   'resume': v:false,
+        \})
+endfunction
 
 "ddu keymapping.
 let mapleader = "\<Space>"
@@ -128,22 +157,47 @@ let mapleader = "\<Space>"
 nnoremap [Ddu] <Nop>
 nmap <Leader>d [Ddu]
 
-nnoremap <silent> [Ddu]h :<C-u>Ddu mr<CR>
-nnoremap <silent> [Ddu]b :<C-u>Ddu buffer<CR>
-nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
-nnoremap <silent> [Ddu]n :<C-u>Ddu file -source-param-new -volatile<CR>
-"nnoremap <silent> [Ddu]f :<C-u>Ddu file<CR>
-nnoremap <silent> [Ddu]F :<C-u>Ddu file_rec<CR>
-nnoremap <silent> [Ddu]g :<C-u>call ddu#start({
+nnoremap <silent> [Ddu]h <Cmd>Ddu mr<CR>
+nnoremap <silent> [Ddu]b <Cmd>Ddu buffer<CR>
+nnoremap <silent> [Ddu]r <Cmd>Ddu register<CR>
+nnoremap [Ddu]g <Cmd>DduCustomGrep<CR>
+nnoremap <silent> [Ddu]G <Cmd>DduRgLive<CR>
+nnoremap <silent> [Ddu]. <Cmd>call ddu#start({
+    \   'name': 'grep',
+    \   'resume': v:true,
+    \})<CR>
+nnoremap <silent> [Ddu]F <Cmd>call ddu#start({
     \   'name': 'grep',
     \   'sources':[
-    \     {'name': 'rg', 'params': {'input': expand('<cword>')}}
+    \     {'name': 'file_rec'}
     \   ],
+    \   'resume': v:false,
     \})<CR>
 
-nnoremap <silent> <Leader>E :<C-u>Ddu -name=fx-left<CR>
-nnoremap <silent> <Leader>e :<C-u>Ddu -name=fx<CR>
+nnoremap <silent> <Leader>e <Cmd>call ddu#start({
+    \   'name': 'fx',
+    \   'searchPath': "",
+    \   'uiParams': {
+    \     'filer': {
+    \       'split': 'no',
+    \     },
+    \   },
+    \   'resume' : v:true,
+    \})<CR>
+nnoremap <silent> <Leader>E <Cmd>call ddu#start({
+    \   'name': 'fx',
+    \   'searchPath': "",
+    \   'uiParams': {
+    \     'filer': {
+    \       'split': 'vertical',
+    \       'splitDirection': 'topleft',
+    \       'winWidth': &columns / 3,
+    \     },
+    \   },
+    \   'resume' : v:true,
+    \})<CR>
 nnoremap <silent> <Leader>r <Cmd>call ddu#start({
-\   'name': 'fx',
-\   'searchPath': expand("%:p"),
-\ })<CR>
+    \   'name': 'fx',
+    \   'searchPath': expand("%:p"),
+    \   'resume' : v:false
+    \ })<CR>
