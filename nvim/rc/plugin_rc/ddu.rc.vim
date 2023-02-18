@@ -1,7 +1,7 @@
 "ddu-setting
 call ddu#custom#patch_global({
     \   'ui': 'ff',
-    \   'sources': [{'name':'file','params':{}},{'name':'file_rec'},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
+    \   'sources': [{'name':'file','params':{}},{'name':'mr'},{'name':'register'},{'name':'buffer'}],
     \   'sourceOptions': {
     \     '_': {
     \       'matchers': ['matcher_substring'],
@@ -119,7 +119,7 @@ endfunction
 
 command! DduRgLive call <SID>ddu_rg_live()
 function! s:ddu_rg_live() abort
-  call ddu#start({
+    call ddu#start({
         \   'name': 'grep',
         \   'volatile': v:true,
         \   'sources': [{
@@ -134,26 +134,44 @@ function! s:ddu_rg_live() abort
         \ })
 endfunction
 
+
+command! DduCustomGrep call <SID>ddu_custom_grep()
+function! s:ddu_custom_grep() abort
+    let grep_text = input("search-word : ")
+    if grep_text == ""
+        let grep_text = expand('<cword>')
+    endif
+    let search_path = input("search-path : ")
+    call ddu#start({
+        \   'name': 'grep',
+        \   'sources':[
+        \     {'name': 'rg', 'params': {'input': grep_text, 'path': search_path}}
+        \   ],
+        \   'resume': v:false,
+        \})
+endfunction
+
 "ddu keymapping.
 let mapleader = "\<Space>"
 
 nnoremap [Ddu] <Nop>
 nmap <Leader>d [Ddu]
 
-nnoremap <silent> [Ddu]h :<C-u>Ddu mr<CR>
-nnoremap <silent> [Ddu]b :<C-u>Ddu buffer<CR>
-nnoremap <silent> [Ddu]r :<C-u>Ddu register<CR>
+nnoremap <silent> [Ddu]h <Cmd>Ddu mr<CR>
+nnoremap <silent> [Ddu]b <Cmd>Ddu buffer<CR>
+nnoremap <silent> [Ddu]r <Cmd>Ddu register<CR>
+nnoremap [Ddu]g <Cmd>DduCustomGrep<CR>
 nnoremap <silent> [Ddu]G <Cmd>DduRgLive<CR>
-nnoremap <silent> [Ddu]g :<C-u>call ddu#start({
-    \   'name': 'grep',
-    \   'sources':[
-    \     {'name': 'rg', 'params': {'input': expand('<cword>')}}
-    \   ],
-    \   'resume': v:false,
-    \})<CR>
-nnoremap <silent> [Ddu]. :<C-u>call ddu#start({
+nnoremap <silent> [Ddu]. <Cmd>call ddu#start({
     \   'name': 'grep',
     \   'resume': v:true,
+    \})<CR>
+nnoremap <silent> [Ddu]F <Cmd>call ddu#start({
+    \   'name': 'grep',
+    \   'sources':[
+    \     {'name': 'file_rec'}
+    \   ],
+    \   'resume': v:false,
     \})<CR>
 
 nnoremap <silent> <Leader>e <Cmd>call ddu#start({
