@@ -15,6 +15,7 @@ Jetpack 'Shougo/ddu-kind-file'
 Jetpack 'Shougo/ddu-kind-word'
 Jetpack 'Shougo/ddu-column-filename'
 Jetpack 'shun/ddu-source-rg'
+
 " filer
 Jetpack 'Shougo/ddu-ui-filer'
 Jetpack 'ryota2357/ddu-column-icon_filename'
