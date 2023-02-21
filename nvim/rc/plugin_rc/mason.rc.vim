@@ -32,7 +32,7 @@ mason_lspconfig.setup_handlers({ function(server_name)
         vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
         vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-        vim.keymap.set('n', '<space>=', vim.lsp.buf.formatting, bufopts)
+        vim.keymap.set('n', '==', vim.lsp.buf.format, bufopts)
     end
     nvim_lsp[server_name].setup(opts)
 end })

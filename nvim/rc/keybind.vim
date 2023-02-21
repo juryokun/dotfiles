@@ -14,8 +14,6 @@ inoremap <C-k> <Up>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-d> <Del>
-" inoremap jj <Esc>
-" inoremap ｊｊ <Esc>
 " move to beginning of line
 inoremap <silent> <C-a> <Esc>^<Insert>
 " move to end of line
@@ -90,8 +88,6 @@ function! s:AutoMarkrement()
     echo 'marked' g:markrement_char[b:markrement_pos]
 endfunction
 
-"nmap [Ddu] <Nop>
-"nmap <Leader>d [Ddu]
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " COMMAND MODE
 

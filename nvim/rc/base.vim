@@ -29,10 +29,6 @@ set smartcase
 set inccommand=split
 
 " file encording
-if has('win32')
-    scriptencoding utf-8
-    set encoding=utf-8
-endif
 set fileencodings=utf-8,iso-2022-jp,euc-jp,cp932,sjis,utf-8
 set fileformats=unix,dos,mac
 
@@ -55,20 +51,11 @@ endif
 "set tags=./tags;,./TAGS;,tags;,TAGS;
 
 " set python path
-let g:python3_host_prog = expand('~/pyvenv/dev/bin/python')
-" let g:python_host_prog = expand('~/pyvenv/neo2/bin/python')
-" if executable('/usr/bin/python3')
-"     let g:python3_host_prog = expand('/usr/bin/python3')
-" elseif executable(g:tools_path.'/python3/python')
-"     let g:python3_host_prog = expand(g:tools_path.'/python3/python')
-" endif
+" let g:python3_host_prog = expand('~/pyvenv/dev/bin/python')
 
 
 if $SHELL =~ '/fish$'
     set shell=bash
-endif
-if has('win32')
-    set shell=powershell
 endif
 
 " tab setting
@@ -96,39 +83,11 @@ function! s:my_tabline()  "{{{
 endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
-
-" neovim setting
-" if has('nvim')
-"     " share clipbord
-"     set clipboard+=unnamedplus
-"     if system('uname -a | grep Microsoft') != ""
-"         let g:clipboard = {
-"             \   'name': 'myClipboard',
-"             \   'copy': {
-"             \      '+': 'win32yank.exe -i',
-"             \      '*': 'win32yank.exe -i',
-"             \    },
-"             \   'paste': {
-"             \      '+': 'win32yank.exe -o',
-"             \      '*': 'win32yank.exe -o',
-"             \   },
-"             \   'cache_enabled': 1,
-"             \ }
-"     endif
-" elseif has('windows')
-"     set clipboard+=unnamed
-" endif
-
-" function! s:isWsl()
-"     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
-" endfunction
-" if s:isWsl() && executable('AutoHotkeyU64.exe')
-"     augroup insertLeave
-"         autocmd!
-"         autocmd InsertLeave * :call system('AutoHotkeyU64.exe "'.g:tools_path.'\ImeDisable.ahk"')
-"     augroup END
-" endif
-"
-
 " https://orange-factory.com/dnf/utf-8.html
-call setcellwidths([[ 0x25A0, 0x25ff, 2 ], [ 0x203b, 0x203b, 2 ], [ 0x2460, 0x24ff, 2 ], [ 0x2190, 0x2199, 2 ]])
+call setcellwidths([
+    \   [ 0x25a0, 0x25ff, 2 ],
+    \   [ 0x203b, 0x203b, 2 ],
+    \   [ 0x2460, 0x24ff, 2 ],
+    \   [ 0x2190, 0x21af, 2 ],
+    \   [ 0x21c0, 0x21ff, 2 ],
+    \])
