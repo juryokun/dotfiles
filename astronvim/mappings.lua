@@ -1,10 +1,13 @@
 -- hop.nvim
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 's', function()
+  hop.hint_anywhere()
+end, {remap=true})
 vim.keymap.set('', ',f', function()
   hop.hint_char1()
 end, {remap=true})
-vim.keymap.set('', ',F', function()
+vim.keymap.set('', ',g', function()
   hop.hint_char2()
 end, {remap=true})
 vim.keymap.set('', ',.', function()
