@@ -1,0 +1,81 @@
+windo normal zo
+:only
+
+" e
+set vicmd="nvim -R"
+
+" 表示変更
+set timefmt=" %Y/%m/%d %H:%M:%S"
+set statusline="  %t  [%T]%= %A %10u:%-7g %15s %20d [%a free]"
+set viewcolumns=-45%{name}..,-{ext},10{size},12{perms},21{mtime}
+set sizefmt=units:iec,precision:3
+set number
+
+" search
+set incsearch
+set nohlsearch
+set ignorecase
+set smartcase
+
+" colorscheme
+colorscheme zenburn_1 Default
+
+" osのopenを呼び出す
+nnoremap X :!open %f<cr>
+
+" nvim
+command! nvim nvim %f
+nnoremap E :nvim<cr>
+
+nnoremap q :q<cr>
+nnoremap , :sync!<cr>
+
+" sort
+nnoremap s :sort<cr>
+
+" rename
+nnoremap r cw
+nnoremap R cw<c-u>
+
+"yank current directory path into the clipboard"
+nnoremap yd :!echo -n %d | pbcopy %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
+
+"yank current file path into the clipboard"
+nnoremap yf :!echo -n %c:p | pbcopy %i<cr>:echo expand('%"c:p') "is yanked to clipboard"<cr>
+
+"yank current filename without path into the clipboard"
+nnoremap yn :!echo -n %c | pbcopy %i<cr>:echo expand('%"c') "is yanked to clipboard"<cr>
+
+" bookmark
+command! fzfbmarks :execute 'cd "'.term('cat ~/.config/vifm/bookmarks | fzf 2>/dev/tty | sed "s/:.*//" ').'"'
+command! fzfbmark :exe "normal! :bmarks\r:write ~/.config/vifm/bookmarks\rq"
+command! fdcddir :execute 'cd "'.term('fd -HE ''.git'' -t d . | fzf 2>/dev/tty').'"'
+command! fdeditfiles :execute 'edit "'.term('fd -HE ''.git'' -t f . | fzf 2>/dev/tty').'"'
+nnoremap <space>bb :fzfbmarks<cr>
+nnoremap <space>ba :bmark notags<cr>:fzfbmark<cr>:echo expand('%"d') "is added to bookmark"<cr>
+nnoremap <space>bd :fdcddir<cr>
+nnoremap <space>bf :fdeditfiles<cr>
+
+
+" Pdf "
+filetype {*.pdf},<application/pdf>
+       \ {Open in Preview}
+       \ open -a Preview.app,
+       \ {Open in Skim}
+       \ open -a Skim.app,
+fileviewer {*.pdf},<application/pdf> pdftotext -nopgbrk %c -
+
+" Office files  "
+"filetype *.doc,*.docx open -a 'Microsoft Word.app'
+"filetype *.xls,*.xlsx open -a 'Microsoft Excel.app'
+"filetype *.ppt,*.pptx open -a 'Microsoft PowerPoint.app'
+
+" Open .pkg binaries  "
+filetype *.pkg open
+
+filetype *.gsheet open
+filetype *.gslides open
+
+filetype *.drawio  open
+
+source ~/.config/vifm/vifm_devicons/favicons.vifm
