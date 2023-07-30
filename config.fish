@@ -23,6 +23,8 @@ if test $status -eq 0
     alias lv 'nvim -R'
 end
 
+alias upall 'brew update && brew upgrade && fisher update && cargo install-update -a'
+alias vf 'vifm'
 # docker setting
 # export DOCKER_HOST='tcp://0.0.0.0:2375'
 
@@ -70,3 +72,6 @@ if test $status -eq 0
         skim_key_bindings
     end
 end
+
+# lf
+set -gx EDITOR "nvim"
