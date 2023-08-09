@@ -1,22 +1,24 @@
 -- hop.nvim
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 's', function()
-  hop.hint_anywhere()
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR })
 end, {remap=true})
-vim.keymap.set('', ',f', function()
-  hop.hint_char1()
+vim.keymap.set('', 't', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 })
 end, {remap=true})
-vim.keymap.set('', ',g', function()
-  hop.hint_char2()
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR })
 end, {remap=true})
-vim.keymap.set('', ',.', function()
+vim.keymap.set('', 'T', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = -1 })
+end, {remap=true})
+vim.keymap.set('', '<leader>j/', function()
   hop.hint_patterns()
 end, {remap=true})
-vim.keymap.set('', ',/', function()
+vim.keymap.set('', '<leader>j*', function()
   hop.hint_patterns({}, vim.api.nvim_exec('echo @/', true))
 end, {remap=true})
-
 
 return {
   n = {
