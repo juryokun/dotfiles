@@ -28,7 +28,9 @@ return {
   },
   { import = "astrocommunity.git.neogit" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
-  { import = "astrocommunity.colorscheme.sonokai" },
+  -- { import = "astrocommunity.colorscheme.sonokai" },
+  { import = "astrocommunity.colorscheme.kanagawa-nvim" },
+  -- { import = "astrocommunity.colorscheme.nightfox-nvim" },
   { import = "astrocommunity.motion.marks-nvim" },
   -- import/override with your plugins folder
 }
