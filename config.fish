@@ -25,6 +25,10 @@ end
 
 alias upall 'brew update && brew upgrade && fisher update && cargo install-update -a'
 alias vf 'vifm'
+
+if test -e ~/cmd/zipForWindows.sh
+  alias zipwin zipForWindows.sh
+end
 # docker setting
 # export DOCKER_HOST='tcp://0.0.0.0:2375'
 
@@ -76,30 +80,8 @@ end
 # lf
 set -gx EDITOR "nvim"
 
-function zipwin
-  argparse -n zipwin 'p/password' -- $argv
-  or return 1
-  
-  set -g zipcmd '7z a -tzip -scsWIN'
-  if set -lq _flag_password
-    set -g zipcmd "$zipcmd -p"
-  end
-
-  if test \( -z "$argv[1]" -o "$argv[1]" = . \)
-    # 現在の作業ディレクトリをZIPファイルに圧縮する．
-    set -g zip_name "$(basename $(pwd)).zip"
-    set -g excommand "fd --type file --strip-cwd-prefix . -X $zipcmd $zip_name {}"
-  else
-    # 指定したディレクトリをZIPファイルに圧縮する．
-    set -l local_dir (dirname $argv[1])
-    set -l target (basename $argv[1])
-    set -g zip_name "$(pwd)/$target.zip"
-    set -g excommand "fd --type file --base-directory=$local_dir . $target -X $zipcmd $zip_name {}"
-  end
-  eval $excommand
-
-  # 作成したZIPファイルに含まれるファイルを確認する．不要であればコメントアウトしてください．
-  7z l $zip_name
-
-  return 0
+function lc --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
+    # `command` is needed in case `lfcd` is aliased to `lf`.
+    # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
+    cd "$(command lf -print-last-dir $argv)"
 end
