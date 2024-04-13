@@ -90,6 +90,27 @@ cmd zi ${{
 map zz :push :z<space>
 map zi :push :zi<space>
 
+cmd copyCurrentPath ${{
+    echo $PWD | tr -d '\n' | pbcopy
+}}
+
+cmd copyFilePath ${{
+    echo $f | tr -d '\n' | pbcopy
+}}
+
+cmd skd ${{
+    result="$(fd --type directory . | sk)"
+	lf -remote "send $id cd \"$result\""
+}}
+map skd skd
+cmd skf ${{
+    result="$(dirname $(fd --type file . | sk))"
+	lf -remote "send $id cd \"$result\""
+}}
+map skf skf
+
+map gp :set ratios 1:2:3;set preview
+map gn :set ratios 1:3;set nopreview
 # define a custom 'delete' command
 # cmd delete ${{
 #     set -f

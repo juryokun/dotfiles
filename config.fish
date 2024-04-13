@@ -70,6 +70,7 @@ which sk >/dev/null 2>&1
 if test $status -eq 0
     alias skf 'rg --files | sk --preview="cat {}"'
     alias skc 'sk --ansi -i -c \'rg --color=always --line-number "{}"\''
+    alias skd 'cd (fd --type directory . | sk || pwd)'
 
     set -l isExists (type -t skim_key_bindings)
     if [ $isExists="function" ]
@@ -79,9 +80,17 @@ end
 
 # lf
 set -gx EDITOR "nvim"
-
 function lc --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
     # `command` is needed in case `lfcd` is aliased to `lf`.
     # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
     cd "$(command lf -print-last-dir $argv)"
+end
+
+function yy
+	set tmp (mktemp -t "yazi-cwd.XXXXXX")
+	yazi $argv --cwd-file="$tmp"
+	if set cwd (cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+		cd -- "$cwd"
+	end
+	rm -f -- "$tmp"
 end
