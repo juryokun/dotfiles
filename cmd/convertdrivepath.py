@@ -12,6 +12,7 @@
 from enum import Enum
 import subprocess
 import sys
+import unittest
 
 class Mode(Enum):
     WIN_TO_MAC = "0"
@@ -64,17 +65,12 @@ class PathConverter:
         elif mode == Mode.MAC_TO_WIN.value:
             self.__mode = MacToWinMode()
         else:
-            self.__mode = None
-            #TODO: error
-            print("mode_error")
+            raise ValueError("mode_error. mode: {}".format(mode))
         
         self.__input_path = subprocess.run('pbpaste', capture_output=True, text=True).stdout
-        # self.__input_path = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian\(test\)/lll"
-        # self.__input_path = "G:\\マイドライブ\\Docs\\obsidian"
 
         if self.__input_path == "":
-            #TODO: error
-            print("path_error")
+            raise ValueError("path_error")
 
         self.__parse_directory()
 
@@ -97,6 +93,94 @@ class PathConverter:
     def output(self):
         subprocess.run('pbcopy', input=self.__output_path, text=True)
 
+    # for test
+    def get_parsed_path(self):
+        return self.__parsed_path
+
+    # for test
+    def get_mode(self):
+        return self.__mode
+
+    # for test
+    def get_output(self):
+        return self.__output_path
+
+
+class TestFunc(unittest.TestCase):
+    def test_win_to_mac1(self):
+        mode = Mode.WIN_TO_MAC.value
+        path = "G:\マイドライブ\Docs\obsidian\lll"
+        expected_path = ["G:","マイドライブ","Docs","obsidian","lll"]
+        expected_mode = Mode.WIN_TO_MAC
+        expected_output = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian/lll"
+
+        subprocess.run('pbcopy', input=path, text=True)
+        converter = PathConverter(mode)
+        converter.convert()
+
+        self.assertEqual(expected_path, converter.get_parsed_path())
+        self.assertEqual(expected_mode, converter.get_mode().mode)
+        self.assertEqual(expected_output, converter.get_output())
+
+    def test_win_to_mac2(self):
+        mode = Mode.WIN_TO_MAC.value
+        path = "G:\マイドライブ\Docs\obsidian(test)\lll"
+        expected_path = ["G:","マイドライブ","Docs","obsidian(test)","lll"]
+        expected_mode = Mode.WIN_TO_MAC
+        expected_output = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian\(test\)/lll"
+
+        subprocess.run('pbcopy', input=path, text=True)
+        converter = PathConverter(mode)
+        converter.convert()
+
+        self.assertEqual(expected_path, converter.get_parsed_path())
+        self.assertEqual(expected_mode, converter.get_mode().mode)
+        self.assertEqual(expected_output, converter.get_output())
+
+    def test_mac_to_win1(self):
+        mode = Mode.MAC_TO_WIN.value
+        path = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian/lll"
+        expected_path = ["", "Users", "juryokun","Google\ Drive" ,"マイドライブ","Docs","obsidian","lll"]
+        expected_mode = Mode.MAC_TO_WIN
+        expected_output = "G:\マイドライブ\Docs\obsidian\lll"
+
+        subprocess.run('pbcopy', input=path, text=True)
+        converter = PathConverter(mode)
+        converter.convert()
+
+        self.assertEqual(expected_path, converter.get_parsed_path())
+        self.assertEqual(expected_mode, converter.get_mode().mode)
+        self.assertEqual(expected_output, converter.get_output())
+
+    def test_mac_to_win2(self):
+        mode = Mode.MAC_TO_WIN.value
+        path = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian\(test\)/lll"
+        expected_path = ["", "Users", "juryokun","Google\ Drive" ,"マイドライブ","Docs","obsidian\(test\)","lll"]
+        expected_mode = Mode.MAC_TO_WIN
+        expected_output = "G:\マイドライブ\Docs\obsidian(test)\lll"
+
+        subprocess.run('pbcopy', input=path, text=True)
+        converter = PathConverter(mode)
+        converter.convert()
+
+        self.assertEqual(expected_path, converter.get_parsed_path())
+        self.assertEqual(expected_mode, converter.get_mode().mode)
+        self.assertEqual(expected_output, converter.get_output())
+
+    def test_path_error(self):
+        mode = Mode.MAC_TO_WIN.value
+        subprocess.run('pbcopy', input="", text=True)
+        with self.assertRaises(ValueError, msg="path_error"):
+            converter = PathConverter(mode)
+
+    def test_mode_error(self):
+        mode = "3"
+        subprocess.run('pbcopy', input="", text=True)
+        with self.assertRaises(ValueError, msg="mode_error. mode: 4"):
+            converter = PathConverter(mode)
+
+
+
 
 
 def main():
@@ -108,4 +192,8 @@ def main():
     converter.output()
 
 if __name__ == "__main__":
-    main()
+    try:
+        # unittest.main()
+        main()
+    except Exception as err:
+        ValueError(err)
