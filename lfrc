@@ -91,11 +91,11 @@ map zz :push :z<space>
 map zi :push :zi<space>
 
 cmd copyCurrentPath ${{
-    echo $PWD | tr -d '\n' | pbcopy
+    echo $PWD | sed "s/ /\\\ /g" | sed "s/(/\\\(/g" | sed "s/)/\\\)/g" | tr -d '\n' | pbcopy
 }}
 
 cmd copyFilePath ${{
-    echo $f | tr -d '\n' | pbcopy
+    echo $f | sed "s/ /\\\ /g" | sed "s/(/\\\(/g" | sed "s/)/\\\)/g" | tr -d '\n' | pbcopy
 }}
 
 cmd skd ${{
