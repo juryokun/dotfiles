@@ -7,7 +7,7 @@
 
 # Optional parameters:
 # @raycast.icon 🤖
-# @raycast.argument1 { "type": "text", "placeholder": "Placeholder", "optional": true }
+# @raycast.argument1 { "type": "text", "placeholder": "MacToWinFlag", "optional": true }
 
 from enum import Enum
 import subprocess
@@ -184,8 +184,9 @@ class TestFunc(unittest.TestCase):
 
 
 def main():
-    arg = sys.argv[1]
-    if arg == "":
+    if len(sys.argv) > 1 and sys.argv[1] == "1":
+        arg = "1"
+    else:
         arg = "0"
     converter = PathConverter(arg)
     converter.convert()
