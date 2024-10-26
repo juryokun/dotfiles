@@ -56,8 +56,16 @@ end
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 
-if test -e ~/cmd/start_tmux.sh
-    bash ~/cmd/start_tmux.sh
+#if test -e ~/cmd/start_tmux.sh
+#    bash ~/cmd/start_tmux.sh
+#end
+
+which zellij >/dev/null 2>&1
+if test $status -eq 0
+    ps | grep zellij | grep -v grep >/dev/null 2>&1
+    if test $status -ne 0
+        zellij a -c main
+    end
 end
 
 # zoxide
