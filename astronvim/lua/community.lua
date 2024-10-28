@@ -32,5 +32,6 @@ return {
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
   -- { import = "astrocommunity.colorscheme.nightfox-nvim" },
   { import = "astrocommunity.motion.marks-nvim" },
+  { import = "astrocommunity.motion.flash-nvim" },
   -- import/override with your plugins folder
 }

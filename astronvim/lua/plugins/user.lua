@@ -20,15 +20,14 @@ return {
     "lambdalisue/kensaku.vim",
     event = "BufRead",
   },
-  {
-    "yuki-yano/fuzzy-motion.vim",
-    event = "BufRead",
-    config = function()
-      vim.keymap.set("", "s", "<cmd>FuzzyMotion<CR>")
-      vim.g.fuzzy_motion_matchers = "['kensaku', 'fzf']"
-    end,
-  },
-
+  -- {
+  --   "yuki-yano/fuzzy-motion.vim",
+  --   event = "BufRead",
+  --   config = function()
+  --     vim.keymap.set("", "s", "<cmd>FuzzyMotion<CR>")
+  --     vim.g.fuzzy_motion_matchers = "['kensaku', 'fzf']"
+  --   end,
+  -- },
   "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
