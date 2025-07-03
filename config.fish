@@ -35,6 +35,7 @@ end
 # path
 set PATH ~/cmd $PATH
 set PATH ~/development/flutter/bin $PATH
+set PATH ~/.local/bin $PATH
 
 # rust
 set -U fish_user_paths $fish_user_paths $HOME/.cargo/bin
