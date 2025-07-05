@@ -1,9 +1,20 @@
 [[mgr.prepend_keymap]]
 on = "!"
 for = "unix"
-run = 'shell "$SHELL" --block'
-desc = "Open $SHELL here"
+run = [ 'shell -- zellij run -d down -c -- "$SHELL"', "zellij run shell" ]
+desc = "Open $SHELL down"
+
+[[mgr.prepend_keymap]]
+on = "%"
+for = "unix"
+run = [ 'shell -- zellij run -d right -c -- "$SHELL"', "zellij run shell" ]
+desc = "Open $SHELL right"
 
 [[mgr.prepend_keymap]]
 on  = "L"
 run = [ 'shell -- zellij edit "$@"', "zellij edit" ]
+
+[[mgr.prepend_keymap]]
+on  = "*"
+run = [ 'shell -- ~/cmd/zipForWindows.sh "$@"', "zipwin" ]
+
