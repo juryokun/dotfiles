@@ -3,3 +3,7 @@ on = "!"
 for = "unix"
 run = 'shell "$SHELL" --block'
 desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on  = "L"
+run = [ 'shell -- zellij edit "$@"', "zellij edit" ]
