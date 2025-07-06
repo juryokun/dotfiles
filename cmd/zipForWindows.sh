@@ -35,17 +35,36 @@ function zip() {
   if [ -n "$needPassword" ]; then
     zipcmd+=" -p"
   fi
+  # if [ -z $arg1 ] || [ $arg1 = . ]; then
+  #   # 現在の作業ディレクトリをZIPファイルに圧縮する．
+  #   zip_name="$(basename $(pwd)).zip"
+  #   execcmd="fd --type file --strip-cwd-prefix . -X $zipcmd $zip_name {}"
+  # else
+  #   # 指定したディレクトリをZIPファイルに圧縮する．
+  #   loc_dir=$(dirname $arg1)
+  #   target=$(basename $arg1)
+  #   zip_name="$(pwd)/${target}.zip"
+  #   if [ -d $arg1 ]; then
+  #     execcmd="fd --type file --base-directory=$loc_dir . $target -X $zipcmd $zip_name {}"
+  #   elif [ -f $arg1 ]; then
+  #     target=${target%.*}
+  #     zip_name="$(pwd)/${target}.zip"
+  #     execcmd="$zipcmd $zip_name $arg1"
+  #   else
+  #     echo "対象がディレクトリでもファイルでもありません。"
+  #     exit 1
+  #   fi
   if [ -z $arg1 ] || [ $arg1 = . ]; then
     # 現在の作業ディレクトリをZIPファイルに圧縮する．
     zip_name="$(basename $(pwd)).zip"
-    execcmd="fd --type file --strip-cwd-prefix . -X $zipcmd $zip_name {}"
+    execcmd="fd --type file --unrestricted --strip-cwd-prefix .DS_Store -X rm -f {} && $zipcmd $zip_name ."
   else
     # 指定したディレクトリをZIPファイルに圧縮する．
     loc_dir=$(dirname $arg1)
     target=$(basename $arg1)
     zip_name="$(pwd)/${target}.zip"
     if [ -d $arg1 ]; then
-      execcmd="fd --type file --base-directory=$loc_dir . $target -X $zipcmd $zip_name {}"
+      execcmd="fd --type file --unrestricted --base-directory=$loc_dir .DS_Store $target -X rm -f {} && $zipcmd $zip_name $target"
     elif [ -f $arg1 ]; then
       target=${target%.*}
       zip_name="$(pwd)/${target}.zip"
