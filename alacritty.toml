@@ -25,6 +25,9 @@ history = 10000
 # Example
 bindings = [
     { key = "V", mods = "Control|Shift", action = "ToggleViMode" },
+    { key = "F11", mods = "Control|Shift", action = "DecreaseFontSize" },
+    { key = "F12", mods = "Control|Shift", action = "IncreaseFontSize" },
+    { key = "F10", mods = "Control|Shift", action = "ResetFontSize" },
     # { key = "A", mods = "Alt", chars = "\u001Ba" },
     # { key = "B", mods = "Alt", chars = "\u001Bb" },
     # { key = "C", mods = "Alt", chars = "\u001Bc" },
@@ -62,3 +65,4 @@ option_as_alt = "Both"
 # ========== Colors ==========
 [colors]
 # transparent_background_colors = true
+
