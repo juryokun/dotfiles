@@ -86,4 +86,119 @@ return {
       -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("hlchunk").setup {
+        chunk = {
+          enable = true,
+        },
+        line_num = {
+          enable = true,
+        },
+      }
+    end,
+  },
+  {
+    "monaqa/dial.nvim",
+    recommended = true,
+    keys = {
+      {
+        "<C-a>",
+        function()
+          return require("dial.map").manipulate("increment", "normal")
+        end,
+        desc = "Increment",
+        mode = { "n", "v" },
+      },
+      {
+        "<C-x>",
+        function()
+          return require("dial.map").manipulate("decrement", "normal")
+        end,
+        desc = "Decrement",
+        mode = { "n", "v" },
+      },
+      {
+        "g<C-a>",
+        function()
+          return require("dial.map").manipulate("increment", "normal")
+        end,
+        desc = "Increment",
+        mode = { "n", "v" },
+      },
+      {
+        "g<C-x>",
+        function()
+          return require("dial.map").manipulate("decrement", "normal")
+        end,
+        desc = "Decrement",
+        mode = { "n", "v" },
+      },
+    },
+    config = function()
+      local augend = require "dial.augend"
+      require("dial.config").augends:register_group {
+        default = {
+          augend.integer.alias.decimal,
+          augend.integer.alias.hex,
+          augend.date.alias["%Y/%m/%d"],
+          augend.constant.alias.bool,
+          augend.semver.alias.semver,
+          augend.date.new {
+            pattern = "%B", -- titlecased month names
+            default_kind = "day",
+          },
+          augend.constant.new {
+            elements = {
+              "january",
+              "february",
+              "march",
+              "april",
+              "may",
+              "june",
+              "july",
+              "august",
+              "september",
+              "october",
+              "november",
+              "december",
+            },
+            word = true,
+            cyclic = true,
+          },
+          augend.constant.new {
+            elements = {
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            },
+            word = true,
+            cyclic = true,
+          },
+          augend.constant.new {
+            elements = {
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday",
+              "friday",
+              "saturday",
+              "sunday",
+            },
+            word = true,
+            cyclic = true,
+          },
+          augend.case.new {
+            types = { "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE_CASE" },
+          },
+        },
+      }
+    end,
+  },
 }
