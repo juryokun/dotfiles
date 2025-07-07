@@ -1,5 +1,4 @@
 local api = require "nvim-tree.api"
-local openfile = require "nvim-tree.actions.node.open-file"
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
 local M = {}
@@ -8,11 +7,15 @@ local view_selection = function(prompt_bufnr, map)
   actions.select_default:replace(function()
     actions.close(prompt_bufnr)
     local selection = action_state.get_selected_entry()
-    local filename = selection.filename
-    if filename == nil then
-      filename = selection[1]
+    local filename = selection.filename or selection[1]
+    local lnum = selection.lnum
+
+    if filename then
+      vim.cmd("tabedit " .. vim.fn.fnameescape(filename))
+      if lnum then
+        vim.api.nvim_win_set_cursor(0, { lnum, 0 })
+      end
     end
-    openfile.fn("preview", filename)
   end)
   return true
 end
