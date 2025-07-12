@@ -73,6 +73,9 @@ return {
     end,
   },
   {
+    --[[
+      improve f,t
+    --]]
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
@@ -87,6 +90,9 @@ return {
     },
   },
   {
+    --[[
+      indent plugin
+    --]]
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
@@ -101,104 +107,27 @@ return {
     end,
   },
   {
+    --[[
+      Ctr-a, Ctr-x
+    --]]
     "monaqa/dial.nvim",
     recommended = true,
-    keys = {
-      {
-        "<C-a>",
-        function()
-          return require("dial.map").manipulate("increment", "normal")
-        end,
-        desc = "Increment",
-        mode = { "n", "v" },
-      },
-      {
-        "<C-x>",
-        function()
-          return require("dial.map").manipulate("decrement", "normal")
-        end,
-        desc = "Decrement",
-        mode = { "n", "v" },
-      },
-      {
-        "g<C-a>",
-        function()
-          return require("dial.map").manipulate("increment", "normal")
-        end,
-        desc = "Increment",
-        mode = { "n", "v" },
-      },
-      {
-        "g<C-x>",
-        function()
-          return require("dial.map").manipulate("decrement", "normal")
-        end,
-        desc = "Decrement",
-        mode = { "n", "v" },
-      },
-    },
+    keys = require "custom.plugins.dial.keymap",
     config = function()
-      local augend = require "dial.augend"
-      require("dial.config").augends:register_group {
-        default = {
-          augend.integer.alias.decimal,
-          augend.integer.alias.hex,
-          augend.date.alias["%Y/%m/%d"],
-          augend.constant.alias.bool,
-          augend.semver.alias.semver,
-          augend.date.new {
-            pattern = "%B", -- titlecased month names
-            default_kind = "day",
-          },
-          augend.constant.new {
-            elements = {
-              "january",
-              "february",
-              "march",
-              "april",
-              "may",
-              "june",
-              "july",
-              "august",
-              "september",
-              "october",
-              "november",
-              "december",
-            },
-            word = true,
-            cyclic = true,
-          },
-          augend.constant.new {
-            elements = {
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday",
-            },
-            word = true,
-            cyclic = true,
-          },
-          augend.constant.new {
-            elements = {
-              "monday",
-              "tuesday",
-              "wednesday",
-              "thursday",
-              "friday",
-              "saturday",
-              "sunday",
-            },
-            word = true,
-            cyclic = true,
-          },
-          augend.case.new {
-            types = { "camelCase", "PascalCase", "snake_case", "SCREAMING_SNAKE_CASE" },
-          },
-        },
-      }
+      require "custom.plugins.dial.config"
+    end,
+  },
+  {
+    --[[
+      Task manager
+    --]]
+    "google/executor.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    event = "BufRead",
+    config = function()
+      require "custom.plugins.executor.config"
     end,
   },
 }
