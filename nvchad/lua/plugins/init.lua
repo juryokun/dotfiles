@@ -17,14 +17,14 @@ return {
   -- { import = "nvchad.blink.lazyspec" },
 
   -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-
+  --   "nvim-treesitter/nvim-treesitter",
+  --   opts = {
+  --     ensure_installed = {
+  --       "vim", "lua", "vimdoc",
+  --       "html", "css"
+  --     },
+  --   },
+  -- },
   -- my settings
   {
     "nvim-telescope/telescope.nvim",
@@ -129,5 +129,13 @@ return {
     config = function()
       require "custom.plugins.executor.config"
     end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "BufRead",
   },
 }
