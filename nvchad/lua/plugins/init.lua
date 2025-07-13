@@ -16,15 +16,22 @@ return {
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
-  -- {
-  --   "nvim-treesitter/nvim-treesitter",
-  --   opts = {
-  --     ensure_installed = {
-  --       "vim", "lua", "vimdoc",
-  --       "html", "css"
-  --     },
-  --   },
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    dependencies = { "OXY2DEV/markview.nvim" },
+    lazy = false,
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "php",
+        "rust",
+      },
+    },
+  },
   -- my settings
   {
     "nvim-telescope/telescope.nvim",
@@ -143,5 +150,21 @@ return {
     --]]
     "kevinhwang91/nvim-bqf",
     event = "VeryLazy",
+  },
+  {
+    --[[
+      Markdown
+    --]]
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+
+    -- For `nvim-treesitter` users.
+    priority = 49,
+
+    -- For blink.cmp's completion
+    -- source
+    -- dependencies = {
+    --     "saghen/blink.cmp"
+    -- },
   },
 }
