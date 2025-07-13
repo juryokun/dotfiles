@@ -49,18 +49,18 @@ return {
   },
   {
     "vim-denops/denops.vim",
-    event = "BufRead",
+    event = "VeryLazy",
   },
   {
     "lambdalisue/kensaku-search.vim",
-    event = "BufRead",
+    event = "VeryLazy",
     config = function()
       vim.keymap.set("c", "<C-j>", "<Plug>(kensaku-search-replace)<CR>")
     end,
   },
   {
     "lambdalisue/kensaku.vim",
-    event = "BufRead",
+    event = "VeryLazy",
   },
   {
     "kylechui/nvim-surround",
@@ -125,7 +125,7 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
-    event = "BufRead",
+    event = "VeryLazy",
     config = function()
       require "configs.executor"
     end,
@@ -135,13 +135,13 @@ return {
       Diff
     --]]
     "sindrets/diffview.nvim",
-    event = "BufRead",
+    event = "VeryLazy",
   },
   {
     --[[
       Quickfix
     --]]
     "kevinhwang91/nvim-bqf",
-    event = "BufRead",
+    event = "VeryLazy",
   },
 }
