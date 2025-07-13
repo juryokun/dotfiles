@@ -59,7 +59,7 @@ require("executor").setup {
       passed = "✓",
     },
   },
-  preset_commands = require "custom.plugins.executor.preset",
+  preset_commands = require "configs.executor-preset-commands",
 }
 vim.api.nvim_set_keymap("n", "<leader>r<CR>", ":ExecutorRun<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>rr", ":ExecutorReset<CR>", {})
