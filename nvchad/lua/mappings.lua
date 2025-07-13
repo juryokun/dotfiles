@@ -12,7 +12,7 @@ local map = vim.keymap.set
 map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 map("n", "<leader>f<cr>", "<cmd>Telescope resume<cr>", { desc = "Telescope Resume" })
 
-local treeutils = require "custom.plugins.nvim-tree.treeutils"
+local treeutils = require "utils.nvim-tree-utils"
 map("n", "<leader>fd", function()
   treeutils.launch_find_files()
 end, { desc = "Telescope Find in under cursol directory" })

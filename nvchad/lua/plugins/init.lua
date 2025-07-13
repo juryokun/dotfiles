@@ -112,9 +112,9 @@ return {
     --]]
     "monaqa/dial.nvim",
     recommended = true,
-    keys = require "custom.plugins.dial.keymap",
+    keys = require "configs.dial-keymaps",
     config = function()
-      require "custom.plugins.dial.config"
+      require "configs.dial"
     end,
   },
   {
@@ -127,14 +127,20 @@ return {
     },
     event = "BufRead",
     config = function()
-      require "custom.plugins.executor.config"
+      require "configs.executor"
     end,
   },
   {
+    --[[
+      Diff
+    --]]
     "sindrets/diffview.nvim",
     event = "BufRead",
   },
   {
+    --[[
+      Quickfix
+    --]]
     "kevinhwang91/nvim-bqf",
     event = "BufRead",
   },
