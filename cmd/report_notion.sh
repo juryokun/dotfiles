@@ -1,7 +1,10 @@
 #!/bin/bash
 
-source "$(dirname "$0")/.config/.env"
-CACHE_PATH="$(dirname "$0")/.cache/notion_report.cache"
+SCRIPT_DIR="$(dirname "$0")"
+CACHE_DIR="${SCRIPT_DIR}/.cache"
+CACHE_FILE="${CACHE_DIR}/notion_report.cache"
+
+source "${SCRIPT_DIR}/.config/.env"
 
 ## 実行モード
 mode_options=("Register" "Display" "Exit")
@@ -171,4 +174,7 @@ case $choice in
 esac
 
 ## キャッシュ書き込み
-echo "command=\"${command}\"" > ${CACHE_PATH}
+if [ ! -d ${CACHE_DIR} ];then
+    mkdir ${CACHE_DIR}
+fi
+echo "command=\"${command}\"" > ${CACHE_FILE}
