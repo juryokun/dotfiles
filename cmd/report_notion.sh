@@ -101,6 +101,8 @@ if [ ${custom_flag} -eq 1 ];then
     echo "2) weekly"
     echo "3) monthly"
     echo "4) quarterly  (Default)"
+    echo "5) semiannual"
+    echo "6) annual"
 
     read -p "登録テンプレートを入力してください(Default: quarterly) " choice
     choice=${choice:-4}
@@ -119,6 +121,14 @@ if [ ${custom_flag} -eq 1 ];then
             ;;
         4)
             report_type="quarterly"
+            report_type_label="quarterly"
+            ;;
+        5)
+            report_type="semiannual"
+            report_type_label="quarterly"
+            ;;
+        6)
+            report_type="annual"
             report_type_label="quarterly"
             ;;
         *)
