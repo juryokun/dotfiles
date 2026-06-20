@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.env.ps1
 .cache/
 conf.d/
 init/work
