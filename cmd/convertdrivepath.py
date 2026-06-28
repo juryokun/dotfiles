@@ -7,194 +7,185 @@
 
 # Optional parameters:
 # @raycast.icon 🤖
-# @raycast.argument1 { "type": "text", "placeholder": "MacToWinFlag", "optional": true }
+# @raycast.argument1 { "type": "text", "placeholder": "path (省略時はクリップボードから取得)", "optional": true }
 
-from enum import Enum
+import re
 import subprocess
 import sys
 import unittest
 
-class Mode(Enum):
-    WIN_TO_MAC = "0"
-    MAC_TO_WIN = "1"
-
-class Separator(Enum):
-    WIN_SEPARATOR = "\\"
-    MAC_SEPARATOR = "/"
-
-class SkipCount(Enum):
-    WIN_TO_MAC_SKIP_COUNT = 1
-    MAC_TO_WIN_SKIP_COUNT = 4
-
-class DrivePath(Enum):
-    WIN_PATH = "G:"
-    MAC_PATH = "/Users/juryokun/Google\ Drive"
-
-class WinToMacMode:
-    mode = Mode.WIN_TO_MAC
-    split_separator = Separator.WIN_SEPARATOR.value
-    join_separator = Separator.MAC_SEPARATOR.value
-    skip_count = SkipCount.WIN_TO_MAC_SKIP_COUNT.value
-    drive_path = DrivePath.MAC_PATH.value
-
-    def convert(self, path):
-        return path.replace("(", "\(").replace(")", "\)")
+# ---- Configuration ----
+WIN_DRIVE = "G:"
+MAC_DRIVE_BASE = "/Users/juryokun/Google Drive"
+# Newer Google Drive for Desktop path (uncomment if migrated):
+# MAC_DRIVE_BASE = "/Users/juryokun/Library/CloudStorage/GoogleDrive-<your-gmail>"
+# ----------------------
 
 
-class MacToWinMode:
-    mode = Mode.MAC_TO_WIN
-    split_separator = Separator.MAC_SEPARATOR.value
-    join_separator = Separator.WIN_SEPARATOR.value
-    skip_count = SkipCount.MAC_TO_WIN_SKIP_COUNT.value
-    drive_path = DrivePath.WIN_PATH.value
-
-    def convert(self, path):
-        return path.replace("\(", "(").replace("\)", ")")
-
-class PathConverter:
-
-    # __init__で代入
-    __mode = None
-    __input_path = ""
-    __parsed_path = []
-    __output_path = ""
-
-    def __init__(self, mode = "0"):
-        if mode == Mode.WIN_TO_MAC.value:
-            self.__mode = WinToMacMode()
-        elif mode == Mode.MAC_TO_WIN.value:
-            self.__mode = MacToWinMode()
-        else:
-            raise ValueError("mode_error. mode: {}".format(mode))
-        
-        self.__input_path = subprocess.run('pbpaste', capture_output=True, text=True).stdout
-
-        if self.__input_path == "":
-            raise ValueError("path_error")
-
-        self.__parse_directory()
+def get_clipboard():
+    return subprocess.run("pbpaste", capture_output=True, text=True).stdout.strip()
 
 
-    def __parse_directory(self):
-        parse_string = self.__input_path
-        separator = self.__mode.split_separator
-
-        self.__parsed_path = parse_string.split(separator)
-        
-
-    def convert(self):
-        separator = self.__mode.join_separator
-        joined_path = self.__mode.drive_path
-        for path in self.__parsed_path[self.__mode.skip_count:]:
-            joined_path += separator + self.__mode.convert(path)
-        self.__output_path = joined_path.rstrip("\n")
+def set_clipboard(text):
+    subprocess.run("pbcopy", input=text, text=True)
 
 
-    def output(self):
-        subprocess.run('pbcopy', input=self.__output_path, text=True)
-
-    # for test
-    def get_parsed_path(self):
-        return self.__parsed_path
-
-    # for test
-    def get_mode(self):
-        return self.__mode
-
-    # for test
-    def get_output(self):
-        return self.__output_path
+def notify(message):
+    script = f'display notification "{message}" with title "convertDrivePath"'
+    subprocess.run(["osascript", "-e", script])
 
 
-class TestFunc(unittest.TestCase):
-    def test_win_to_mac1(self):
-        mode = Mode.WIN_TO_MAC.value
-        path = "G:\マイドライブ\Docs\obsidian\lll"
-        expected_path = ["G:","マイドライブ","Docs","obsidian","lll"]
-        expected_mode = Mode.WIN_TO_MAC
-        expected_output = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian/lll"
-
-        subprocess.run('pbcopy', input=path, text=True)
-        converter = PathConverter(mode)
-        converter.convert()
-
-        self.assertEqual(expected_path, converter.get_parsed_path())
-        self.assertEqual(expected_mode, converter.get_mode().mode)
-        self.assertEqual(expected_output, converter.get_output())
-
-    def test_win_to_mac2(self):
-        mode = Mode.WIN_TO_MAC.value
-        path = "G:\マイドライブ\Docs\obsidian(test)\lll"
-        expected_path = ["G:","マイドライブ","Docs","obsidian(test)","lll"]
-        expected_mode = Mode.WIN_TO_MAC
-        expected_output = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian\(test\)/lll"
-
-        subprocess.run('pbcopy', input=path, text=True)
-        converter = PathConverter(mode)
-        converter.convert()
-
-        self.assertEqual(expected_path, converter.get_parsed_path())
-        self.assertEqual(expected_mode, converter.get_mode().mode)
-        self.assertEqual(expected_output, converter.get_output())
-
-    def test_mac_to_win1(self):
-        mode = Mode.MAC_TO_WIN.value
-        path = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian/lll"
-        expected_path = ["", "Users", "juryokun","Google\ Drive" ,"マイドライブ","Docs","obsidian","lll"]
-        expected_mode = Mode.MAC_TO_WIN
-        expected_output = "G:\マイドライブ\Docs\obsidian\lll"
-
-        subprocess.run('pbcopy', input=path, text=True)
-        converter = PathConverter(mode)
-        converter.convert()
-
-        self.assertEqual(expected_path, converter.get_parsed_path())
-        self.assertEqual(expected_mode, converter.get_mode().mode)
-        self.assertEqual(expected_output, converter.get_output())
-
-    def test_mac_to_win2(self):
-        mode = Mode.MAC_TO_WIN.value
-        path = "/Users/juryokun/Google\ Drive/マイドライブ/Docs/obsidian\(test\)/lll"
-        expected_path = ["", "Users", "juryokun","Google\ Drive" ,"マイドライブ","Docs","obsidian\(test\)","lll"]
-        expected_mode = Mode.MAC_TO_WIN
-        expected_output = "G:\マイドライブ\Docs\obsidian(test)\lll"
-
-        subprocess.run('pbcopy', input=path, text=True)
-        converter = PathConverter(mode)
-        converter.convert()
-
-        self.assertEqual(expected_path, converter.get_parsed_path())
-        self.assertEqual(expected_mode, converter.get_mode().mode)
-        self.assertEqual(expected_output, converter.get_output())
-
-    def test_path_error(self):
-        mode = Mode.MAC_TO_WIN.value
-        subprocess.run('pbcopy', input="", text=True)
-        with self.assertRaises(ValueError, msg="path_error"):
-            converter = PathConverter(mode)
-
-    def test_mode_error(self):
-        mode = "3"
-        subprocess.run('pbcopy', input="", text=True)
-        with self.assertRaises(ValueError, msg="mode_error. mode: 4"):
-            converter = PathConverter(mode)
+def unescape_shell_path(path):
+    """Remove shell escaping (e.g. Google\\ Drive → Google Drive, \\( → ()."""
+    return re.sub(r"\\(.)", r"\1", path)
 
 
+def detect_path_type(path):
+    """Return 'windows', 'mac', or None."""
+    if re.match(r"^[A-Za-z]:[\\\/]", path):
+        return "windows"
+    if path.startswith("/"):
+        return "mac"
+    return None
 
+
+def win_to_mac(path):
+    """G:\\foo\\bar  →  /Users/.../Google Drive/foo/bar"""
+    # Normalize mixed separators
+    path = path.replace("/", "\\")
+    parts = path.split("\\")
+    # parts[0] = drive letter (G:), parts[1:] = actual segments
+    rel_parts = [p for p in parts[1:] if p]
+    return MAC_DRIVE_BASE + "/" + "/".join(rel_parts)
+
+
+def mac_to_win(path):
+    """/Users/.../Google Drive/foo/bar  →  G:\\foo\\bar"""
+    # Normalize shell-escaped input first
+    path = unescape_shell_path(path)
+
+    if not path.startswith(MAC_DRIVE_BASE):
+        raise ValueError(
+            f"Google Driveのパスではありません。\n"
+            f"期待されるベース: {MAC_DRIVE_BASE}\n"
+            f"入力: {path}"
+        )
+
+    rel_path = path[len(MAC_DRIVE_BASE):].lstrip("/")
+    parts = [p for p in rel_path.split("/") if p]
+    return WIN_DRIVE + "\\" + "\\".join(parts)
 
 
 def main():
-    if len(sys.argv) > 1 and sys.argv[1] == "1":
-        arg = "1"
+    if len(sys.argv) > 1 and sys.argv[1]:
+        path = sys.argv[1].strip()
     else:
-        arg = "0"
-    converter = PathConverter(arg)
-    converter.convert()
-    converter.output()
+        path = get_clipboard()
+
+    if not path:
+        notify("パスが指定されていません（引数またはクリップボードから取得）")
+        return
+
+    path_type = detect_path_type(path)
+
+    try:
+        if path_type == "windows":
+            result = win_to_mac(path)
+            set_clipboard(result)
+            notify(f"Win→Mac 変換完了")
+        elif path_type == "mac":
+            result = mac_to_win(path)
+            set_clipboard(result)
+            notify(f"Mac→Win 変換完了")
+        else:
+            notify(f"不明なパス形式です: {path[:50]}")
+    except ValueError as e:
+        notify(str(e)[:200])
+
+
+# ---- Tests ----
+
+class TestDetectPathType(unittest.TestCase):
+    def test_windows_backslash(self):
+        self.assertEqual("windows", detect_path_type("G:\\マイドライブ\\Docs"))
+
+    def test_windows_slash(self):
+        self.assertEqual("windows", detect_path_type("G:/マイドライブ/Docs"))
+
+    def test_mac(self):
+        self.assertEqual("mac", detect_path_type("/Users/juryokun/Google Drive/マイドライブ"))
+
+    def test_unknown(self):
+        self.assertIsNone(detect_path_type("relative/path"))
+
+
+class TestWinToMac(unittest.TestCase):
+    def test_basic(self):
+        path = "G:\\マイドライブ\\Docs\\obsidian\\lll"
+        expected = "/Users/juryokun/Google Drive/マイドライブ/Docs/obsidian/lll"
+        self.assertEqual(expected, win_to_mac(path))
+
+    def test_with_parens(self):
+        path = "G:\\マイドライブ\\Docs\\obsidian(test)\\lll"
+        expected = "/Users/juryokun/Google Drive/マイドライブ/Docs/obsidian(test)/lll"
+        self.assertEqual(expected, win_to_mac(path))
+
+    def test_with_spaces(self):
+        path = "G:\\マイドライブ\\My Folder\\file name.pdf"
+        expected = "/Users/juryokun/Google Drive/マイドライブ/My Folder/file name.pdf"
+        self.assertEqual(expected, win_to_mac(path))
+
+    def test_mixed_separators(self):
+        path = "G:/マイドライブ/Docs/file"
+        expected = "/Users/juryokun/Google Drive/マイドライブ/Docs/file"
+        self.assertEqual(expected, win_to_mac(path))
+
+
+class TestMacToWin(unittest.TestCase):
+    def test_basic(self):
+        path = "/Users/juryokun/Google Drive/マイドライブ/Docs/obsidian/lll"
+        expected = "G:\\マイドライブ\\Docs\\obsidian\\lll"
+        self.assertEqual(expected, mac_to_win(path))
+
+    def test_with_parens(self):
+        path = "/Users/juryokun/Google Drive/マイドライブ/Docs/obsidian(test)/lll"
+        expected = "G:\\マイドライブ\\Docs\\obsidian(test)\\lll"
+        self.assertEqual(expected, mac_to_win(path))
+
+    def test_shell_escaped_input(self):
+        # Shell-escaped path (copied from terminal)
+        path = "/Users/juryokun/Google\\ Drive/マイドライブ/Docs/obsidian\\(test\\)/lll"
+        expected = "G:\\マイドライブ\\Docs\\obsidian(test)\\lll"
+        self.assertEqual(expected, mac_to_win(path))
+
+    def test_shell_escaped_spaces(self):
+        path = "/Users/juryokun/Google\\ Drive/マイドライブ/My\\ Folder/file\\ name.pdf"
+        expected = "G:\\マイドライブ\\My Folder\\file name.pdf"
+        self.assertEqual(expected, mac_to_win(path))
+
+    def test_wrong_base_raises(self):
+        path = "/Users/juryokun/Dropbox/file"
+        with self.assertRaises(ValueError):
+            mac_to_win(path)
+
+
+class TestRoundTrip(unittest.TestCase):
+    def test_win_mac_win(self):
+        original = "G:\\マイドライブ\\Docs\\folder (v2)\\file.pdf"
+        mac = win_to_mac(original)
+        back = mac_to_win(mac)
+        self.assertEqual(original, back)
+
+    def test_mac_win_mac(self):
+        original = "/Users/juryokun/Google Drive/マイドライブ/Docs/folder (v2)/file.pdf"
+        win = mac_to_win(original)
+        back = win_to_mac(win)
+        self.assertEqual(original, back)
+
 
 if __name__ == "__main__":
-    try:
-        # unittest.main()
+    if len(sys.argv) > 1 and sys.argv[1] == "test":
+        sys.argv.pop(1)
+        unittest.main()
+    else:
         main()
-    except Exception as err:
-        ValueError(err)
