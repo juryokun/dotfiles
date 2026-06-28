@@ -1,122 +1,67 @@
 #!/bin/bash
+# Windows互換ZIPの圧縮・解凍スクリプト。
+# - ZIPファイルが渡されたら解凍（同名ディレクトリに展開）
+# - それ以外は圧縮（Mac固有ファイルを除外）
+# Usage: zipForWindows.sh <対象ファイル/ディレクトリ...>
+#        zipForWindows.sh [出力先.zip] <対象ファイル/ディレクトリ...>
 
-## オプション解析
-while (( $# > 0 ))
-do
-  case $1 in
-    -p | --password)
-      needPassword=1
-      ;;
-    -l | --list)
-      list=1
-      ;;
-    -*)
-      echo "invalid option"
-      exit 1
-      ;;
-    *)
-      ARGS=("${ARGS[@]}" "$1")
-      ;;
-  esac
-  shift
+set -euo pipefail
+
+EXCLUDE_OPTS=(
+  "-xr!.DS_Store"
+  "-xr!__MACOSX"
+  "-xr!.AppleDouble"
+  "-xr!.Spotlight-V100"
+  "-xr!.fseventsd"
+  "-xr!.TemporaryItems"
+  "-xr!.Trashes"
+  "-xr!desktop.ini"
+  "-xr!Thumbs.db"
+)
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $(basename "$0") [出力先.zip] <対象...>" >&2
+  exit 1
+fi
+
+# 全引数がZIPファイルなら解凍モード
+all_zip=true
+for arg in "$@"; do
+  [[ "$arg" == *.zip && -f "$arg" ]] || { all_zip=false; break; }
 done
 
-## 引数解析
-get_nth () {
-  local n=$1
+if $all_zip; then
+  for zip_file in "$@"; do
+    out_dir="${zip_file%.zip}"
+    echo "解凍: $zip_file -> $out_dir/"
+    7z x "$zip_file" -o"$out_dir"
+    echo ""
+  done
+  exit 0
+fi
+
+# 圧縮モード
+# 第1引数が .zip で終わる場合は出力先として使用、そうでなければ自動生成
+if [[ "$1" == *.zip ]]; then
+  output="$1"
   shift
-  eval echo \$${n}
-}
-arg1=$(get_nth 1 "${ARGS[@]}")
-
-# 圧縮
-function zip() {
-  zipcmd='7z a -scsWIN'
-  if [ -n "$needPassword" ]; then
-    zipcmd+=" -p"
-  fi
-  # if [ -z $arg1 ] || [ $arg1 = . ]; then
-  #   # 現在の作業ディレクトリをZIPファイルに圧縮する．
-  #   zip_name="$(basename $(pwd)).zip"
-  #   execcmd="fd --type file --strip-cwd-prefix . -X $zipcmd $zip_name {}"
-  # else
-  #   # 指定したディレクトリをZIPファイルに圧縮する．
-  #   loc_dir=$(dirname $arg1)
-  #   target=$(basename $arg1)
-  #   zip_name="$(pwd)/${target}.zip"
-  #   if [ -d $arg1 ]; then
-  #     execcmd="fd --type file --base-directory=$loc_dir . $target -X $zipcmd $zip_name {}"
-  #   elif [ -f $arg1 ]; then
-  #     target=${target%.*}
-  #     zip_name="$(pwd)/${target}.zip"
-  #     execcmd="$zipcmd $zip_name $arg1"
-  #   else
-  #     echo "対象がディレクトリでもファイルでもありません。"
-  #     exit 1
-  #   fi
-  if [ -z $arg1 ] || [ $arg1 = . ]; then
-    # 現在の作業ディレクトリをZIPファイルに圧縮する．
-    zip_name="$(basename $(pwd)).zip"
-    execcmd="fd --type file --unrestricted --strip-cwd-prefix .DS_Store -X rm -f {} && $zipcmd $zip_name ."
-  else
-    # 指定したディレクトリをZIPファイルに圧縮する．
-    loc_dir=$(dirname $arg1)
-    target=$(basename $arg1)
-    zip_name="$(pwd)/${target}.zip"
-    if [ -d $arg1 ]; then
-      execcmd="fd --type file --unrestricted --base-directory=$loc_dir .DS_Store $target -X rm -f {} && $zipcmd $zip_name $target"
-    elif [ -f $arg1 ]; then
-      target=${target%.*}
-      zip_name="$(pwd)/${target}.zip"
-      execcmd="$zipcmd $zip_name $arg1"
-    else
-      echo "対象がディレクトリでもファイルでもありません。"
-      exit 1
-    fi
-fi
-}
-
-# 解凍
-function unzip() {
-  zipcmd='7z x'
-  execcmd="$zipcmd $arg1"
-}
-
-# 中身表示
-function disp() {
-  zipcmd='7z l'
-  execcmd="$zipcmd $arg1"
-}
-
-## 本処理
-if [ -n "$list" ]; then
-  # 中身を表示
-  disp
-elif [ -f "$arg1" ]; then
-  # 引数がファイルだった場合
-  case "$arg1" in
-    *\.gz | *\.zip | *\.7z)
-      # 圧縮ファイルなら解凍する
-      zipflag=0
-      unzip
-      ;;
-    *)
-      # 圧縮ファイル以外
-      zipflag=1
-      zip
-      ;;
-  esac
 else
-  # ディレクトリが指定されている場合
-  zip
+  base=$(basename "$1")
+  # ディレクトリはフルネーム、ファイルは拡張子を除いた名前をベースにする
+  if [ -d "$1" ]; then
+    output="${PWD}/${base}.zip"
+  else
+    output="${PWD}/${base%.*}.zip"
+  fi
 fi
 
-echo $execcmd
-eval $execcmd
-
-# 作成したZIPファイルに含まれるファイルを確認する．不要であればコメントアウトしてください．
-if [ -n "$zipflag" ] && [ $zipflag = 1 ]; then
-  7z l $zip_name
+if [ $# -eq 0 ]; then
+  echo "対象ファイル/ディレクトリを指定してください。" >&2
+  exit 1
 fi
 
-exit 0
+7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" "$output" "$@"
+
+echo ""
+echo "作成: $output"
+7z l "$output"
