@@ -2,8 +2,8 @@
 # Windows互換ZIPの圧縮・解凍スクリプト。
 # - ZIPファイルが渡されたら解凍（同名ディレクトリに展開）
 # - それ以外は圧縮（Mac固有ファイルを除外）
-# Usage: zipForWindows.sh <対象ファイル/ディレクトリ...>
-#        zipForWindows.sh [出力先.zip] <対象ファイル/ディレクトリ...>
+# Usage: zipForWindows.sh [-p] <対象ファイル/ディレクトリ...>
+#        zipForWindows.sh [-p] [出力先.zip] <対象ファイル/ディレクトリ...>
 
 set -euo pipefail
 
@@ -19,8 +19,17 @@ EXCLUDE_OPTS=(
   "-xr!Thumbs.db"
 )
 
+USE_PASSWORD=false
+while getopts ":p" opt; do
+  case $opt in
+    p) USE_PASSWORD=true ;;
+    \?) echo "不明なオプション: -$OPTARG" >&2; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
 if [ $# -eq 0 ]; then
-  echo "Usage: $(basename "$0") [出力先.zip] <対象...>" >&2
+  echo "Usage: $(basename "$0") [-p] [出力先.zip] <対象...>" >&2
   exit 1
 fi
 
@@ -60,7 +69,12 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" "$output" "$@"
+PASSWORD_OPTS=()
+if $USE_PASSWORD; then
+  PASSWORD_OPTS=("-p" "-mhe=on")
+fi
+
+7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" "${PASSWORD_OPTS[@]}" "$output" "$@"
 
 echo ""
 echo "作成: $output"
