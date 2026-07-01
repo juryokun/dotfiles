@@ -69,12 +69,11 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-PASSWORD_OPTS=()
 if $USE_PASSWORD; then
-  PASSWORD_OPTS=("-p" "-mhe=on")
+  7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" -p -mhe=on "$output" "$@"
+else
+  7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" "$output" "$@"
 fi
-
-7z a -tzip -scsWIN "${EXCLUDE_OPTS[@]}" "${PASSWORD_OPTS[@]}" "$output" "$@"
 
 echo ""
 echo "作成: $output"
